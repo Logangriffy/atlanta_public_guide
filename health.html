@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#274b3a" />
+  <title>Data Health | Atlanta + North Georgia Local Guide</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .health-main{min-height:100vh;background:#f7f2e8;padding:2rem 0 4rem}.health-wrap{width:min(100% - 2rem,56rem);margin:auto}.health-card{background:#fff;border:1px solid #ddd5c7;border-radius:1rem;padding:1.25rem;margin:1rem 0}.health-row{display:flex;justify-content:space-between;gap:1rem;align-items:center}.badge{display:inline-block;padding:.28rem .6rem;border-radius:999px;font-weight:800;font-size:.78rem}.pending{background:#eee8dc;color:#6d655b}.ok{background:#dce9df;color:#234532}.bad{background:#f4d8d2;color:#7b2f23}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;overflow-wrap:anywhere}.health-card h2{margin:.1rem 0 .6rem}.health-card p{margin:.35rem 0;color:#5c625f}.back{display:inline-block;margin-top:1rem;font-weight:800;color:#274b3a}
+  </style>
+</head>
+<body>
+<main class="health-main">
+  <div class="health-wrap">
+    <p class="eyebrow">SYSTEM CHECK</p>
+    <h1>Website data health</h1>
+    <p>This page checks whether the public-safe Google Sheets feed can be reached from a normal visitor browser.</p>
+
+    <section class="health-card">
+      <div class="health-row"><h2>Places feed</h2><span id="placesStatus" class="badge pending">Checking…</span></div>
+      <p id="placesDetail">Connecting to Google Sheets…</p>
+    </section>
+
+    <section class="health-card">
+      <div class="health-row"><h2>Community links feed</h2><span id="linksStatus" class="badge pending">Checking…</span></div>
+      <p id="linksDetail">Connecting to Google Sheets…</p>
+    </section>
+
+    <section class="health-card">
+      <h2>Feed source</h2>
+      <p class="mono">Atlanta Public Guide - Website Data Feed</p>
+      <p>This health page is intentionally excluded from search indexing.</p>
+    </section>
+
+    <a class="back" href="index.html">← Return to guide</a>
+  </div>
+</main>
+<script>
+const spreadsheetId='1vnIouZJf1iCYqDfFF6A4gDkfEk-hsSVEhLtPXcFDcB0';
+function url(sheet){return `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheet)}&_=${Date.now()}`}
+async function check(sheet,statusId,detailId){
+  const badge=document.getElementById(statusId), detail=document.getElementById(detailId);
+  try{
+    const r=await fetch(url(sheet),{cache:'no-store'});
+    const t=await r.text();
+    if(!r.ok||/Sign in|Request access|<!doctype html/i.test(t.slice(0,700))) throw new Error('Feed is not publicly readable');
+    const lines=t.split(/\r?\n/).filter(Boolean);
+    badge.textContent='Connected'; badge.className='badge ok';
+    detail.textContent=`Public feed responded successfully. Approximately ${Math.max(0,lines.length-1).toLocaleString()} data rows received.`;
+  }catch(e){
+    badge.textContent='Blocked'; badge.className='badge bad';
+    detail.textContent=`Could not read this feed publicly: ${e.message}. Check Google Sheet General access is “Anyone with the link” and Viewer.`;
+  }
+}
+check('Places','placesStatus','placesDetail');
+check('CommunityLinks','linksStatus','linksDetail');
+</script>
+</body>
+</html>
