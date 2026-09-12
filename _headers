@@ -1,0 +1,17 @@
+/data-feed.js
+  Cache-Control: no-cache, must-revalidate
+
+/app.js
+  Cache-Control: no-cache, must-revalidate
+
+/search.js
+  Cache-Control: no-cache, must-revalidate
+
+/moving.js
+  Cache-Control: no-cache, must-revalidate
+
+/city.js
+  Cache-Control: no-cache, must-revalidate
+
+/place.js
+  Cache-Control: no-cache, must-revalidate
