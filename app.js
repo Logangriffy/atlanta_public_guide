@@ -1,22 +1,412 @@
-const CONFIG={spreadsheetId:"1vnIouZJf1iCYqDfFF6A4gDkfEk-hsSVEhLtPXcFDcB0",placesSheet:"Places",linksSheet:"CommunityLinks",homeLimit:10};
-const state={places:[],links:[]};const $=id=>document.getElementById(id);const text=(v,f="")=>(v||f).trim();
-function csvUrl(sheet){return `https://docs.google.com/spreadsheets/d/${CONFIG.spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheet)}&_=${Date.now()}`}
-function parseCSV(s){const rows=[];let row=[],field="",q=false;for(let i=0;i<s.length;i++){const c=s[i],n=s[i+1];if(q&&c==='"'&&n==='"'){field+='"';i++}else if(c==='"')q=!q;else if(c===','&&!q){row.push(field);field=""}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&n==='\n')i++;row.push(field);if(row.some(x=>x!==""))rows.push(row);row=[];field=""}else field+=c}row.push(field);if(row.some(x=>x!==""))rows.push(row);return rows}
-function objects(rows){if(!rows.length)return[];const h=rows[0].map(x=>x.trim());return rows.slice(1).map(r=>Object.fromEntries(h.map((k,i)=>[k,(r[i]||"").trim()]))) }
-async function fetchSheet(sheet){const r=await fetch(csvUrl(sheet),{cache:"no-store"});if(!r.ok)throw new Error(sheet);const body=await r.text();if(/Sign in|Request access|<!doctype html/i.test(body.slice(0,500)))throw new Error("feed");return objects(parseCSV(body))}
-function slugify(v){return text(v).toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/&/g," and ").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
-function placeSlug(p){return `${slugify(p.Place)}-${slugify(p.City)}`}
-function category(p){return text(p["Public Category (Auto)"],text(p.Category,"Other"))}
-function notes(p){return text(p["Client Notes"],text(p["Vibe / Good For"]))}
-function mapLink(a){return a?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a)}`:""}
-function uniq(v){return [...new Set(v.filter(Boolean))].sort((a,b)=>a.localeCompare(b))}
-function opt(v,label=v){const o=document.createElement("option");o.value=v;o.textContent=label;return o}
-function placeCard(p){const card=document.createElement("article");card.className="place-card";const href=`/place.html?slug=${encodeURIComponent(placeSlug(p))}`,city=text(p.City),cat=category(p),price=text(p.Price),summary=notes(p),address=text(p.Address);card.innerHTML=`<div class="card-top"><h3><a class="place-title-link"></a></h3>${price?'<span class="price"></span>':''}</div><div class="meta"></div>${summary?'<p class="notes"></p>':''}<div class="card-actions"></div>`;const title=card.querySelector(".place-title-link");title.href=href;title.textContent=text(p.Place);if(price)card.querySelector(".price").textContent=price;[city,cat].forEach((v,i)=>{if(!v)return;const s=document.createElement("span");s.className=`pill ${i?'category':''}`.trim();s.textContent=v;card.querySelector(".meta").appendChild(s)});if(summary)card.querySelector(".notes").textContent=summary;const d=document.createElement("a");d.href=href;d.textContent="View details";d.className="primary-link";card.querySelector(".card-actions").appendChild(d);if(address){const m=document.createElement("a");m.href=mapLink(address);m.target="_blank";m.rel="noopener noreferrer";m.textContent="Map ↗";card.querySelector(".card-actions").appendChild(m)}return card}
-function filtered(){const q=$("searchInput").value.trim().toLowerCase(),city=$("cityFilter").value,cat=$("categoryFilter").value;return state.places.filter(p=>text(p["Place Status"])!=="Inactive").filter(p=>city==="All"||text(p.City)===city).filter(p=>cat==="All"||category(p)===cat).filter(p=>!q||[p.Place,p.City,p.Category,p["Public Category (Auto)"],p["Area / Neighborhood"],p["Tags / Best For"],p["Client Notes"],p.Address].join(" ").toLowerCase().includes(q))}
-function renderPlaces(){const r=filtered(),grid=$("placesGrid");grid.replaceChildren();r.slice(0,CONFIG.homeLimit).forEach(p=>grid.appendChild(placeCard(p)));$("resultCount").textContent=`${r.length.toLocaleString()} place${r.length===1?"":"s"}${r.length>CONFIG.homeLimit?` · showing first ${CONFIG.homeLimit}`:""}`;if(!r.length){const d=document.createElement("div");d.className="empty-state";d.textContent="No places match those filters yet.";grid.appendChild(d)}const u=new URL("/search.html",location.origin),q=$("searchInput").value.trim(),city=$("cityFilter").value,cat=$("categoryFilter").value;if(q)u.searchParams.set("q",q);if(city!=="All")u.searchParams.set("city",city);if(cat!=="All")u.searchParams.set("category",cat);$("viewAllResults").href=u.pathname+u.search;$("viewAllResults").textContent=r.length>CONFIG.homeLimit?`View all ${r.length.toLocaleString()} results`:`Open full directory`}
-function communityStatus(l){const mins=text(l["Drive minutes"]);return mins?`${mins} min · Route verified`:/verified/i.test(text(l["Link status"]))?"Route verified":"Surrounding area"}
-function renderCommunities(){const community=$("communityFilter").value,cat=$("communityCategoryFilter").value,grid=$("communityResults");grid.replaceChildren();if(!community){const d=document.createElement("div");d.className="empty-state";d.textContent="Choose a community to see nearby places.";grid.appendChild(d);return}const byId=new Map(state.places.map(p=>[text(p["Place ID"]),p]));const links=state.links.filter(l=>text(l.Community)===community).filter(l=>cat==="All"||text(l["Use category"])===cat).slice(0,12);links.forEach(l=>{const p=byId.get(text(l["Place ID"]));if(!p)return;const c=document.createElement("article");c.className="community-card";const href=`/place.html?slug=${encodeURIComponent(placeSlug(p))}`;c.innerHTML=`<h3><a class="place-title-link"></a></h3><div class="meta"></div><span class="status"></span>${notes(p)?'<p class="community-notes"></p>':''}<a class="community-detail-link"></a>`;c.querySelector(".place-title-link").href=href;c.querySelector(".place-title-link").textContent=text(p.Place);c.querySelector(".status").textContent=communityStatus(l);if(notes(p))c.querySelector(".community-notes").textContent=notes(p);const m=c.querySelector(".meta");[text(p.City),text(l["Use category"])].forEach((v,i)=>{if(!v)return;const s=document.createElement("span");s.className=`pill ${i?'category':''}`.trim();s.textContent=v;m.appendChild(s)});const a=c.querySelector(".community-detail-link");a.href=href;a.textContent="View details →";grid.appendChild(c)});if(!links.length){const d=document.createElement("div");d.className="empty-state";d.textContent="No matching linked places yet.";grid.appendChild(d)}}
-function populate(){uniq(state.places.map(p=>text(p.City))).forEach(v=>$("cityFilter").appendChild(opt(v)));uniq(state.places.map(category)).forEach(v=>$("categoryFilter").appendChild(opt(v)));uniq(state.links.map(l=>text(l.Community))).forEach(v=>$("communityFilter").appendChild(opt(v)));uniq(state.links.map(l=>text(l["Use category"])) ).forEach(v=>$("communityCategoryFilter").appendChild(opt(v)));$("placeCount").textContent=state.places.length.toLocaleString();$("cityCount").textContent=`${uniq(state.places.map(p=>text(p.City))).length} cities`;$("categoryCount").textContent=`${uniq(state.places.map(category)).length} categories`}
-function bind(){["searchInput","cityFilter","categoryFilter"].forEach(id=>$(id).addEventListener(id==="searchInput"?"input":"change",renderPlaces));$("clearFilters").addEventListener("click",()=>{$("searchInput").value="";$("cityFilter").value="All";$("categoryFilter").value="All";renderPlaces()});["communityFilter","communityCategoryFilter"].forEach(id=>$(id).addEventListener("change",renderCommunities))}
-async function init(){bind();try{const [places,links]=await Promise.all([fetchSheet(CONFIG.placesSheet),fetchSheet(CONFIG.linksSheet)]);state.places=places.filter(p=>text(p.Place));state.links=links.filter(l=>text(l["Place ID"]));populate();renderPlaces();renderCommunities();$("dataStatus").textContent="Live data connected"}catch(e){console.error(e);$("dataStatus").textContent="Data feed unavailable";$("resultCount").textContent="Guide unavailable"}}
-document.addEventListener("DOMContentLoaded",init);
+const CONFIG = {
+  spreadsheetId: "1vnIouZJf1iCYqDfFF6A4gDkfEk-hsSVEhLtPXcFDcB0",
+  placesSheet: "Places",
+  linksSheet: "CommunityLinks",
+  homeLimit: 10,
+};
+
+const state = { places: [], links: [] };
+const $ = (id) => document.getElementById(id);
+const text = (value, fallback = "") => String(value ?? fallback).trim();
+
+function csvUrl(sheet) {
+  return `https://docs.google.com/spreadsheets/d/${CONFIG.spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheet)}&_=${Date.now()}`;
+}
+
+function parseCSV(source) {
+  const rows = [];
+  let row = [];
+  let field = "";
+  let quoted = false;
+
+  for (let i = 0; i < source.length; i++) {
+    const char = source[i];
+    const next = source[i + 1];
+    if (quoted && char === '"' && next === '"') {
+      field += '"';
+      i++;
+    } else if (char === '"') {
+      quoted = !quoted;
+    } else if (char === "," && !quoted) {
+      row.push(field);
+      field = "";
+    } else if ((char === "\n" || char === "\r") && !quoted) {
+      if (char === "\r" && next === "\n") i++;
+      row.push(field);
+      if (row.some((cell) => cell !== "")) rows.push(row);
+      row = [];
+      field = "";
+    } else {
+      field += char;
+    }
+  }
+
+  row.push(field);
+  if (row.some((cell) => cell !== "")) rows.push(row);
+  return rows;
+}
+
+function rowsToObjects(rows) {
+  if (!rows.length) return [];
+  const headers = rows[0].map((h) => text(h));
+  return rows.slice(1).map((row) => {
+    const obj = {};
+    headers.forEach((header, index) => {
+      obj[header] = text(row[index]);
+    });
+    return obj;
+  });
+}
+
+async function fetchSheet(sheet) {
+  const response = await fetch(csvUrl(sheet), { cache: "no-store" });
+  if (!response.ok) throw new Error(`Could not load ${sheet}`);
+  const body = await response.text();
+  if (/Sign in|Request access|<!doctype html/i.test(body.slice(0, 500))) {
+    throw new Error("Public data feed is not readable");
+  }
+  return rowsToObjects(parseCSV(body));
+}
+
+function slugify(value) {
+  return text(value)
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function placeSlug(place) {
+  return `${slugify(place.Place)}-${slugify(place.City)}`;
+}
+
+function publicCategory(place) {
+  return text(place["Public Category (Auto)"], text(place.Category, "Other"));
+}
+
+function publicNotes(place) {
+  return text(place["Client Notes"], text(place["Vibe / Good For"]));
+}
+
+function mapLink(address) {
+  return address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}` : "";
+}
+
+function uniqueSorted(values) {
+  return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
+}
+
+function addOption(select, value, label = value) {
+  if (!select) return;
+  const option = document.createElement("option");
+  option.value = value;
+  option.textContent = label;
+  select.appendChild(option);
+}
+
+function buildPlaceCard(place) {
+  const card = document.createElement("article");
+  card.className = "place-card";
+
+  const name = text(place.Place, "Unnamed place");
+  const city = text(place.City);
+  const category = publicCategory(place);
+  const price = text(place.Price);
+  const summary = publicNotes(place);
+  const address = text(place.Address);
+  const detailHref = `/place.html?slug=${encodeURIComponent(placeSlug(place))}`;
+
+  const top = document.createElement("div");
+  top.className = "card-top";
+
+  const heading = document.createElement("h3");
+  const titleLink = document.createElement("a");
+  titleLink.className = "place-title-link";
+  titleLink.href = detailHref;
+  titleLink.textContent = name;
+  heading.appendChild(titleLink);
+  top.appendChild(heading);
+
+  if (price) {
+    const priceEl = document.createElement("span");
+    priceEl.className = "price";
+    priceEl.textContent = price;
+    top.appendChild(priceEl);
+  }
+  card.appendChild(top);
+
+  const meta = document.createElement("div");
+  meta.className = "meta";
+  [city, category].forEach((value, index) => {
+    if (!value) return;
+    const pill = document.createElement("span");
+    pill.className = index ? "pill category" : "pill";
+    pill.textContent = value;
+    meta.appendChild(pill);
+  });
+  card.appendChild(meta);
+
+  if (summary) {
+    const notes = document.createElement("p");
+    notes.className = "notes";
+    notes.textContent = summary;
+    card.appendChild(notes);
+  }
+
+  const actions = document.createElement("div");
+  actions.className = "card-actions";
+
+  const details = document.createElement("a");
+  details.href = detailHref;
+  details.className = "primary-link";
+  details.textContent = "View details";
+  actions.appendChild(details);
+
+  if (address) {
+    const map = document.createElement("a");
+    map.href = mapLink(address);
+    map.target = "_blank";
+    map.rel = "noopener noreferrer";
+    map.textContent = "Map ↗";
+    actions.appendChild(map);
+  }
+
+  card.appendChild(actions);
+  return card;
+}
+
+function filteredPlaces() {
+  const searchInput = $("searchInput");
+  const cityFilter = $("cityFilter");
+  const categoryFilter = $("categoryFilter");
+  if (!searchInput || !cityFilter || !categoryFilter) return [];
+
+  const query = searchInput.value.trim().toLowerCase();
+  const city = cityFilter.value;
+  const category = categoryFilter.value;
+
+  return state.places.filter((place) => {
+    const status = text(place["Place Status"]);
+    if (status && status !== "Active") return false;
+    if (city !== "All" && text(place.City) !== city) return false;
+    if (category !== "All" && publicCategory(place) !== category) return false;
+    if (!query) return true;
+
+    const haystack = [
+      place.Place,
+      place.City,
+      place.Category,
+      place["Public Category (Auto)"],
+      place["Area / Neighborhood"],
+      place["Tags / Best For"],
+      place["Client Notes"],
+      place.Address,
+    ].join(" ").toLowerCase();
+
+    return haystack.includes(query);
+  });
+}
+
+function updateViewAllLink(results) {
+  const link = $("viewAllResults");
+  if (!link) return;
+
+  const url = new URL("/search.html", location.origin);
+  const query = $("searchInput")?.value.trim() || "";
+  const city = $("cityFilter")?.value || "All";
+  const category = $("categoryFilter")?.value || "All";
+
+  if (query) url.searchParams.set("q", query);
+  if (city !== "All") url.searchParams.set("city", city);
+  if (category !== "All") url.searchParams.set("category", category);
+
+  link.href = url.pathname + url.search;
+  link.textContent = results.length > CONFIG.homeLimit
+    ? `View all ${results.length.toLocaleString()} results →`
+    : "Open full directory →";
+}
+
+function renderPlaces() {
+  const grid = $("placesGrid");
+  const count = $("resultCount");
+  if (!grid || !count) return;
+
+  const results = filteredPlaces();
+  grid.replaceChildren();
+
+  for (const place of results.slice(0, CONFIG.homeLimit)) {
+    try {
+      grid.appendChild(buildPlaceCard(place));
+    } catch (error) {
+      console.error("Could not render place", place?.Place, error);
+    }
+  }
+
+  count.textContent = `${results.length.toLocaleString()} place${results.length === 1 ? "" : "s"}${results.length > CONFIG.homeLimit ? ` · showing first ${CONFIG.homeLimit}` : ""}`;
+
+  if (!grid.children.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = results.length ? "Matching places were found, but could not be displayed." : "No places match those filters yet.";
+    grid.appendChild(empty);
+  }
+
+  updateViewAllLink(results);
+}
+
+function communityStatus(link) {
+  const minutes = text(link["Drive minutes"]);
+  if (minutes) return `${minutes} min · Route verified`;
+  return /verified/i.test(text(link["Link status"])) ? "Route verified" : "Surrounding area";
+}
+
+function renderCommunities() {
+  const communityFilter = $("communityFilter");
+  const categoryFilter = $("communityCategoryFilter");
+  const grid = $("communityResults");
+  if (!communityFilter || !categoryFilter || !grid) return;
+
+  const community = communityFilter.value;
+  const category = categoryFilter.value;
+  grid.replaceChildren();
+
+  if (!community) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "Choose a community to see nearby places.";
+    grid.appendChild(empty);
+    return;
+  }
+
+  const placesById = new Map(state.places.map((place) => [text(place["Place ID"]), place]));
+  const links = state.links
+    .filter((link) => text(link.Community) === community)
+    .filter((link) => category === "All" || text(link["Use category"]) === category)
+    .slice(0, 12);
+
+  for (const link of links) {
+    const place = placesById.get(text(link["Place ID"]));
+    if (!place) continue;
+
+    const card = document.createElement("article");
+    card.className = "community-card";
+    const detailHref = `/place.html?slug=${encodeURIComponent(placeSlug(place))}`;
+
+    const title = document.createElement("h3");
+    const titleLink = document.createElement("a");
+    titleLink.className = "place-title-link";
+    titleLink.href = detailHref;
+    titleLink.textContent = text(place.Place);
+    title.appendChild(titleLink);
+    card.appendChild(title);
+
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    [text(place.City), text(link["Use category"])].forEach((value, index) => {
+      if (!value) return;
+      const pill = document.createElement("span");
+      pill.className = index ? "pill category" : "pill";
+      pill.textContent = value;
+      meta.appendChild(pill);
+    });
+    card.appendChild(meta);
+
+    const status = document.createElement("span");
+    status.className = "status";
+    status.textContent = communityStatus(link);
+    card.appendChild(status);
+
+    const note = publicNotes(place);
+    if (note) {
+      const p = document.createElement("p");
+      p.className = "community-notes";
+      p.textContent = note;
+      card.appendChild(p);
+    }
+
+    const details = document.createElement("a");
+    details.href = detailHref;
+    details.className = "community-detail-link";
+    details.textContent = "View details →";
+    card.appendChild(details);
+
+    grid.appendChild(card);
+  }
+
+  if (!grid.children.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "No matching linked places yet.";
+    grid.appendChild(empty);
+  }
+}
+
+function populateFilters() {
+  const cityFilter = $("cityFilter");
+  const categoryFilter = $("categoryFilter");
+  const communityFilter = $("communityFilter");
+  const communityCategoryFilter = $("communityCategoryFilter");
+
+  uniqueSorted(state.places.map((place) => text(place.City))).forEach((value) => addOption(cityFilter, value));
+  uniqueSorted(state.places.map(publicCategory)).forEach((value) => addOption(categoryFilter, value));
+  uniqueSorted(state.links.map((link) => text(link.Community))).forEach((value) => addOption(communityFilter, value));
+  uniqueSorted(state.links.map((link) => text(link["Use category"]))).forEach((value) => addOption(communityCategoryFilter, value));
+
+  if ($("placeCount")) $("placeCount").textContent = state.places.length.toLocaleString();
+  if ($("cityCount")) $("cityCount").textContent = `${uniqueSorted(state.places.map((place) => text(place.City))).length} cities`;
+  if ($("categoryCount")) $("categoryCount").textContent = `${uniqueSorted(state.places.map(publicCategory)).length} categories`;
+}
+
+function bindEvents() {
+  ["searchInput", "cityFilter", "categoryFilter"].forEach((id) => {
+    const element = $(id);
+    if (!element) return;
+    element.addEventListener(id === "searchInput" ? "input" : "change", renderPlaces);
+  });
+
+  $("clearFilters")?.addEventListener("click", () => {
+    if ($("searchInput")) $("searchInput").value = "";
+    if ($("cityFilter")) $("cityFilter").value = "All";
+    if ($("categoryFilter")) $("categoryFilter").value = "All";
+    renderPlaces();
+  });
+
+  ["communityFilter", "communityCategoryFilter"].forEach((id) => {
+    $(id)?.addEventListener("change", renderCommunities);
+  });
+}
+
+async function init() {
+  bindEvents();
+
+  try {
+    const [places, links] = await Promise.all([
+      fetchSheet(CONFIG.placesSheet),
+      fetchSheet(CONFIG.linksSheet),
+    ]);
+
+    state.places = places.filter((place) => text(place.Place));
+    state.links = links.filter((link) => text(link["Place ID"]));
+
+    populateFilters();
+    renderPlaces();
+    renderCommunities();
+
+    if ($("dataStatus")) $("dataStatus").textContent = "Live data connected";
+  } catch (error) {
+    console.error("Guide initialization failed", error);
+    if ($("dataStatus")) $("dataStatus").textContent = "Data feed unavailable";
+    if ($("resultCount")) $("resultCount").textContent = "Guide unavailable";
+    const grid = $("placesGrid");
+    if (grid) {
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "The directory could not load. Please refresh in a moment.";
+      grid.replaceChildren(empty);
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", init);
