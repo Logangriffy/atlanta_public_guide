@@ -3,38 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#274b3a" />
-  <meta name="robots" content="noindex,nofollow" />
-  <meta id="metaDescription" name="description" content="Place details from the Atlanta + North Georgia Independent Local Guide." />
+  <meta name="theme-color" content="#f7f3ec" />
+  <meta id="metaDescription" name="description" content="Place details from the Atlanta Local Guide." />
   <link id="canonicalLink" rel="canonical" href="/place.html" />
   <meta property="og:type" content="website" />
-  <meta id="ogTitle" property="og:title" content="Atlanta + North Georgia Local Guide" />
-  <meta id="ogDescription" property="og:description" content="Independent local place guide." />
+  <meta id="ogTitle" property="og:title" content="Atlanta Local Guide" />
+  <meta id="ogDescription" property="og:description" content="Explore a local place in Atlanta or North Georgia." />
   <meta id="ogUrl" property="og:url" content="" />
-  <title>Place | Atlanta + North Georgia Local Guide</title>
-  <link rel="stylesheet" href="/styles.css" />
+  <title>Place | Atlanta Local Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=20260912-ui2" />
+  <link rel="stylesheet" href="/place.css?v=20260912-ui2" />
 </head>
 <body class="place-page">
   <header class="site-header">
     <div class="shell nav-wrap">
-      <a class="brand" href="/" aria-label="Atlanta and North Georgia Local Guide home">
-        <span class="brand-mark">NG</span>
-        <span><strong>Atlanta + North Georgia</strong><small>Independent Local Guide</small></span>
-      </a>
+      <a class="brand brand-local" href="/" aria-label="Atlanta Local home"><span class="brand-mark brand-mark-local">A</span><span class="brand-copy"><strong>ATLANTA LOCAL GUIDE</strong><small>Atlanta &amp; North Georgia</small></span></a>
       <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="/search.html">Explore</a>
-        <a href="/#communities">Near Communities</a>
-        <a href="/disclaimer.html">About</a>
+        <a href="/search.html">Explore &amp; search</a>
+        <a href="/#communities">New-home communities</a>
+        <a href="/#connect">Connect with Logan</a>
       </nav>
     </div>
   </header>
 
   <main id="placeMain" class="place-main">
     <div class="shell place-shell">
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a><span>›</span><a href="/search.html">Explore</a><span>›</span><span id="breadcrumbName">Place</span>
-      </nav>
-
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/search.html">Explore</a><span>›</span><span id="breadcrumbName">Place</span></nav>
       <div id="placeLoading" class="place-loading">Loading place details…</div>
 
       <article id="placeContent" hidden>
@@ -49,59 +46,27 @@
 
         <div class="place-layout">
           <section class="place-primary">
-            <div class="detail-section">
-              <h2>About</h2>
-              <p id="aboutText"></p>
-            </div>
-
-            <div class="detail-section">
-              <h2>Details</h2>
-              <dl id="factsGrid" class="facts-grid"></dl>
-            </div>
-
-            <div id="tagsSection" class="detail-section" hidden>
-              <h2>Good for</h2>
-              <div id="tagList" class="tag-list"></div>
-            </div>
-
-            <div id="communitySection" class="detail-section" hidden>
-              <h2>Nearby community context</h2>
-              <div id="communityList" class="community-detail-list"></div>
-              <p class="fine-print">Community names are shown only as geographic reference points. This guide is independent and is not sponsored or endorsed by any homebuilder.</p>
-            </div>
+            <div class="detail-section"><h2>About</h2><p id="aboutText"></p></div>
+            <div class="detail-section"><h2>Details</h2><dl id="factsGrid" class="facts-grid"></dl></div>
+            <div id="tagsSection" class="detail-section" hidden><h2>Good for</h2><div id="tagList" class="tag-list"></div></div>
+            <div id="communitySection" class="detail-section" hidden><h2>Nearby community context</h2><div id="communityList" class="community-detail-list"></div><p class="fine-print">Community names are shown as geographic reference points. This is Logan’s independent guide and not an official builder website.</p></div>
           </section>
 
-          <aside class="place-sidebar">
-            <div class="sidebar-card">
-              <h2>Plan your visit</h2>
-              <div id="visitDetails"></div>
-            </div>
-          </aside>
+          <aside class="place-sidebar"><div class="sidebar-card"><h2>Plan your visit</h2><div id="visitDetails"></div></div></aside>
         </div>
 
         <section id="relatedSection" class="detail-section related-section" hidden>
-          <div class="section-heading compact"><div><p class="eyebrow">KEEP EXPLORING</p><h2>More nearby</h2></div></div>
+          <div class="section-heading compact"><div><p class="eyebrow dark">KEEP EXPLORING</p><h2>More nearby</h2></div></div>
           <div id="relatedGrid" class="card-grid"></div>
         </section>
       </article>
 
-      <div id="placeError" class="empty-state" hidden>
-        <strong>We couldn’t find that place.</strong><br />
-        <a href="/search.html">Browse the full guide</a>
-      </div>
+      <div id="placeError" class="empty-state" hidden><strong>We couldn’t find that place.</strong><br /><a href="/search.html">Browse the full guide</a></div>
     </div>
   </main>
 
-  <footer>
-    <div class="shell footer-inner">
-      <div>
-        <strong>Atlanta + North Georgia Local Guide</strong>
-        <p>Independent local-resource guide. Builder and community names are used only for identification and geographic reference.</p>
-      </div>
-      <a href="/disclaimer.html">About &amp; Disclaimer</a>
-    </div>
-  </footer>
+  <footer class="site-footer-new"><div class="shell footer-grid"><div class="footer-brand-block"><a class="brand footer-brand" href="/"><span class="brand-mark brand-mark-local">A</span><span><strong>Atlanta Local</strong><small>A little local knowledge. A whole new place to call home.</small></span></a></div><div class="footer-links"><a href="/search.html">Explore the guide</a><a href="/#communities">New-home communities</a><a href="/#connect">Connect with Logan</a></div><div class="footer-meta"><strong>Atlanta &amp; North Georgia</strong><span>Local guide by Logan Griffiths</span><span>This is Logan’s guide, not an official PulteGroup website.</span></div></div></footer>
 
-  <script src="/place.js" defer></script>
+  <script src="/place.js?v=20260912-ui2" defer></script>
 </body>
 </html>
