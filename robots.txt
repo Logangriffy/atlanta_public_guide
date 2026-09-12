@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# Prelaunch: indexing is intentionally blocked until the site is moved to a neutral production hostname and technical SEO checks are complete.
