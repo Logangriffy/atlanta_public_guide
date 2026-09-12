@@ -3,99 +3,173 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#274b3a" />
-  <meta name="description" content="An independent local guide to restaurants, activities, shopping, parks and everyday essentials across Atlanta and North Georgia." />
-  <meta name="robots" content="noindex,nofollow" />
-  <meta name="googlebot" content="noindex,nofollow" />
+  <meta name="theme-color" content="#f7f3ec" />
+  <meta name="description" content="A local guide to restaurants, things to do, parks, shopping and new-home communities across Atlanta and North Georgia." />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Atlanta + North Georgia Local Guide" />
-  <meta property="og:description" content="Independent local guide to restaurants, activities, shopping, parks and everyday essentials across Atlanta and North Georgia." />
-  <meta name="twitter:card" content="summary" />
-  <title>Atlanta + North Georgia Local Guide</title>
+  <meta property="og:title" content="Atlanta Local Guide" />
+  <meta property="og:description" content="Find your weekend. Find your place. Explore local favorites and new-home communities across Atlanta and North Georgia." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Atlanta Local Guide | Atlanta & North Georgia</title>
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=20260912-ui2" />
 </head>
-<body>
+<body class="home-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="site-header">
     <div class="shell nav-wrap">
-      <a class="brand" href="#top" aria-label="Atlanta and North Georgia Local Guide home">
-        <span class="brand-mark">NG</span>
-        <span><strong>Atlanta + North Georgia</strong><small>Independent Local Guide</small></span>
+      <a class="brand brand-local" href="/" aria-label="Atlanta Local home">
+        <span class="brand-mark brand-mark-local">A</span>
+        <span class="brand-copy"><strong>ATLANTA LOCAL GUIDE</strong><small>Atlanta &amp; North Georgia</small></span>
       </a>
       <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="/search.html">Search</a>
-        <a href="#communities">Near Communities</a>
-        <a href="/disclaimer.html">About</a>
+        <a href="#explore">Explore &amp; search</a>
+        <a href="#communities">New-home communities</a>
+        <a href="#connect">Connect with Logan</a>
       </nav>
+      <a class="nav-cta" href="#connect">Plan a visit</a>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="shell hero-grid">
-        <div>
-          <p class="eyebrow">INDEPENDENT LOCAL GUIDE</p>
-          <h1>Find your next favorite place in Atlanta &amp; North Georgia.</h1>
-          <p class="hero-copy">Explore restaurants, coffee, parks, shopping, family activities, healthcare, everyday essentials and more across the communities people actually live in.</p>
+  <main id="main">
+    <section class="editorial-hero" id="top">
+      <div class="shell hero-layout">
+        <div class="hero-copy-block">
+          <p class="eyebrow dark">ATLANTA &amp; NORTH GEORGIA</p>
+          <h1>Find your weekend.<br><em>Find your place.</em></h1>
+          <p class="hero-lede">The dinner spot. The Saturday adventure. The neighborhood that feels like you. Get to know life around Atlanta, one local find at a time.</p>
           <div class="hero-actions">
-            <a class="button primary" href="/search.html">Search the full guide</a>
-            <a class="button secondary" href="#communities">Browse near communities</a>
+            <a class="button primary" href="#explore">Explore the guide</a>
+            <a class="button ghost" href="#communities">Find a community</a>
+          </div>
+          <div class="hero-stats" aria-label="Guide statistics">
+            <div><strong id="placeCount">—</strong><span>local places</span></div>
+            <span class="stat-divider"></span>
+            <div><strong id="cityCountNumber">—</strong><span>cities to explore</span></div>
           </div>
         </div>
-        <div class="hero-card" aria-label="Guide summary">
-          <span class="hero-card-label">LIVE GUIDE</span>
-          <strong id="placeCount">—</strong>
-          <span>active places</span>
-          <div class="stat-row"><span id="cityCount">— cities</span><span id="categoryCount">— categories</span></div>
-          <small>Data updates automatically from the maintained local guide.</small>
+
+        <figure class="hero-photo-card">
+          <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/View_of_the_midtown_Atlanta_skyline_looking_out_over_Piedmont_Park%27s_Lake_Clara_Meer.jpg/1280px-View_of_the_midtown_Atlanta_skyline_looking_out_over_Piedmont_Park%27s_Lake_Clara_Meer.jpg" alt="Midtown Atlanta skyline seen across Lake Clara Meer in Piedmont Park" />
+          <figcaption>
+            <span>Piedmont Park</span>
+            <span>Atlanta</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="category-strip" aria-label="Browse by category">
+      <div class="shell category-strip-inner">
+        <div class="category-intro">
+          <p class="eyebrow">A PLACE TO</p>
+          <h2>belong.</h2>
+        </div>
+        <div id="categoryLinks" class="category-links">
+          <a href="/search.html?category=Restaurants">Restaurants <span>↗</span></a>
+          <a href="/search.html?category=Outdoors%20%26%20Parks">Outdoors &amp; Parks <span>↗</span></a>
+          <a href="/search.html?category=Things%20to%20Do">Things to Do <span>↗</span></a>
+          <a href="/search.html?category=Coffee%20%26%20Dessert">Coffee &amp; Dessert <span>↗</span></a>
+          <a href="/search.html?category=Shopping">Shopping <span>↗</span></a>
         </div>
       </div>
     </section>
 
-    <section id="explore" class="section shell">
-      <div class="section-heading">
-        <div><p class="eyebrow">QUICK SEARCH</p><h2>Browse places</h2></div>
-        <p>Search by name or filter by city and category. The homepage shows up to 10 matching places, then sends you to the full directory.</p>
-      </div>
-      <div class="filter-panel">
-        <label class="search-field"><span>Search</span><input id="searchInput" type="search" placeholder="Try coffee, park, sushi…" autocomplete="off" /></label>
-        <label><span>City</span><select id="cityFilter"><option value="All">All cities</option></select></label>
-        <label><span>Category</span><select id="categoryFilter"><option value="All">All categories</option></select></label>
-        <button id="clearFilters" class="text-button" type="button">Clear filters</button>
-      </div>
-      <div class="results-toolbar"><strong id="resultCount">Loading…</strong><span id="dataStatus">Connecting to live guide…</span></div>
-      <div id="placesGrid" class="card-grid" aria-live="polite"></div>
-      <a id="viewAllResults" class="button secondary load-more" href="/search.html">Open full directory</a>
-    </section>
-
-    <section id="communities" class="community-section">
+    <section id="explore" class="section places-section">
       <div class="shell">
-        <div class="section-heading light">
-          <div><p class="eyebrow">NEAR COMMUNITIES</p><h2>Explore places near residential communities</h2></div>
-          <p>Builder and community names are used only as geographic reference points. This site is independent and is not owned, operated, sponsored or endorsed by any homebuilder.</p>
+        <div class="editorial-heading">
+          <div>
+            <p class="eyebrow dark">YOUR NEXT LOCAL FIND</p>
+            <h2>Good places.<br><em>Great possibilities.</em></h2>
+          </div>
+          <a class="text-link" href="/search.html">Browse all places <span>→</span></a>
         </div>
-        <div class="community-controls">
-          <label><span>Community</span><select id="communityFilter"><option value="">Choose a community</option></select></label>
-          <label><span>Category</span><select id="communityCategoryFilter"><option value="All">All categories</option></select></label>
+
+        <div class="filter-panel filter-panel-editorial">
+          <label class="search-field"><span>Search places</span><input id="searchInput" type="search" placeholder="Search places" autocomplete="off" /></label>
+          <label><span>City</span><select id="cityFilter"><option value="All">All cities</option></select></label>
+          <label><span>Category</span><select id="categoryFilter"><option value="All">All categories</option></select></label>
+          <label><span>Community</span><select id="placeCommunityFilter"><option value="All">All communities</option></select></label>
+          <button id="clearFilters" class="filter-clear" type="button" aria-label="Clear filters">Clear</button>
         </div>
-        <div id="communityResults" class="community-grid"></div>
+
+        <div class="results-toolbar editorial-toolbar">
+          <strong id="resultCount">Loading places…</strong>
+          <span id="dataStatus">Connecting to guide…</span>
+        </div>
+        <div id="placesGrid" class="card-grid editorial-card-grid" aria-live="polite"></div>
+        <div class="load-more-wrap"><a id="viewAllResults" class="button outline" href="/search.html">View more places</a></div>
       </div>
     </section>
 
-    <section class="independence-note">
-      <div class="shell independence-card">
-        <div><p class="eyebrow">INDEPENDENT RESOURCE</p><h2>Not a builder-branded website.</h2><p>This guide is independently created and maintained. References to PulteGroup, Pulte Homes, Centex, other builders, and specific community names are used only to identify locations and nearby amenities. No builder has sponsored, endorsed, reviewed, or approved this site unless explicitly stated.</p></div>
-        <a class="button secondary dark-button" href="/disclaimer.html">Read full disclaimer</a>
+    <section class="cities-section">
+      <div class="shell cities-layout">
+        <div class="cities-heading">
+          <p class="eyebrow">GET TO KNOW THE AREA</p>
+          <h2>So many ways<br>to feel <em>at home.</em></h2>
+          <p>Start with a city. Find the places that make it yours.</p>
+        </div>
+        <div id="cityLinks" class="city-links" aria-label="Browse cities"></div>
+      </div>
+    </section>
+
+    <section id="communities" class="community-showcase">
+      <div class="shell">
+        <div class="editorial-heading community-heading">
+          <div>
+            <p class="eyebrow dark">MORE THAN AN ADDRESS</p>
+            <h2>A new home.<br><em>A whole new neighborhood.</em></h2>
+          </div>
+          <a class="text-link" href="/search.html">All communities <span>→</span></a>
+        </div>
+        <div id="featuredCommunities" class="featured-community-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="connect" class="connect-section">
+      <div class="shell connect-card">
+        <div>
+          <p class="eyebrow">FIND YOUR PLACE HERE</p>
+          <h2>Love the area?<br><em>Let’s talk about living here.</em></h2>
+          <p>Connect with Logan to explore new-home communities and plan a visit that fits what you’re looking for.</p>
+        </div>
+        <a class="button light" href="mailto:?subject=Atlanta%20area%20community%20visit">Plan a community visit <span>→</span></a>
       </div>
     </section>
   </main>
 
-  <footer><div class="shell footer-inner"><div><strong>Atlanta + North Georgia Local Guide</strong><p>Independent local-resource guide. Not owned, operated, sponsored, endorsed, or affiliated with PulteGroup, Pulte Homes, Centex, or any other homebuilder. Builder and community names are used only for identification and geographic reference. All trademarks belong to their respective owners.</p><p><a href="/disclaimer.html">About &amp; Disclaimer</a></p></div><a href="#top">Back to top ↑</a></div></footer>
+  <footer class="site-footer-new">
+    <div class="shell footer-grid">
+      <div class="footer-brand-block">
+        <a class="brand footer-brand" href="/"><span class="brand-mark brand-mark-local">A</span><span><strong>Atlanta Local</strong><small>A little local knowledge. A whole new place to call home.</small></span></a>
+      </div>
+      <div class="footer-links">
+        <a href="#explore">Explore the guide</a>
+        <a href="#communities">New-home communities</a>
+        <a href="#connect">Connect with Logan</a>
+      </div>
+      <div class="footer-meta">
+        <strong>Atlanta &amp; North Georgia</strong>
+        <span>Local guide by Logan Griffiths</span>
+        <span>Pulte new-home sales consultant</span>
+      </div>
+    </div>
+    <div class="shell footer-bottom">
+      <p>Community associations describe area context. Verify hours, prices and routes with official sources. This is Logan’s guide, not an official PulteGroup website.</p>
+      <a href="/disclaimer.html">Privacy &amp; disclaimer</a>
+      <p class="photo-credit">Hero photo: Marc Merlin / Wikimedia Commons · CC BY-SA 4.0 · Cropped.</p>
+    </div>
+  </footer>
 
   <nav class="mobile-nav" aria-label="Mobile navigation">
-    <a href="/search.html">Search</a>
-    <a href="#communities">Near Communities</a>
+    <a href="#explore">Explore</a>
+    <a href="#communities">Communities</a>
+    <a href="#connect">Connect</a>
   </nav>
-  <script src="/app.js?v=20260912-1705" defer></script>
+
+  <script src="/app.js?v=20260912-ui2" defer></script>
 </body>
 </html>
