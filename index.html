@@ -16,106 +16,26 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="shell nav-wrap">
-      <a class="brand" href="#top" aria-label="Atlanta and North Georgia Local Guide home">
-        <span class="brand-mark">NG</span>
-        <span><strong>Atlanta + North Georgia</strong><small>Independent Local Guide</small></span>
-      </a>
-      <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="#explore">Explore</a>
-        <a href="#communities">Near Communities</a>
-        <a href="disclaimer.html">About</a>
-      </nav>
-    </div>
-  </header>
+  <header class="site-header"><div class="shell nav-wrap"><a class="brand" href="#top" aria-label="Atlanta and North Georgia Local Guide home"><span class="brand-mark">NG</span><span><strong>Atlanta + North Georgia</strong><small>Independent Local Guide</small></span></a><nav class="desktop-nav" aria-label="Primary navigation"><a href="#explore">Explore</a><a href="#communities">Near Communities</a><a href="disclaimer.html">About</a></nav></div></header>
 
   <main id="top">
-    <section class="hero">
-      <div class="shell hero-grid">
-        <div>
-          <p class="eyebrow">INDEPENDENT LOCAL GUIDE</p>
-          <h1>Find your next favorite place in Atlanta &amp; North Georgia.</h1>
-          <p class="hero-copy">Explore restaurants, coffee, parks, shopping, family activities, healthcare, everyday essentials and more across the communities people actually live in.</p>
-          <div class="hero-actions">
-            <a class="button primary" href="#explore">Explore places</a>
-            <a class="button secondary" href="#communities">Browse near communities</a>
-          </div>
-        </div>
-        <div class="hero-card" aria-label="Guide summary">
-          <span class="hero-card-label">LIVE GUIDE</span>
-          <strong id="placeCount">—</strong>
-          <span>active places</span>
-          <div class="stat-row"><span id="cityCount">— cities</span><span id="categoryCount">— categories</span></div>
-          <small>Data updates automatically from the maintained local guide.</small>
-        </div>
-      </div>
-    </section>
+    <section class="hero"><div class="shell hero-grid"><div><p class="eyebrow">INDEPENDENT LOCAL GUIDE</p><h1>Find your next favorite place in Atlanta &amp; North Georgia.</h1><p class="hero-copy">Explore restaurants, coffee, parks, shopping, family activities, healthcare, everyday essentials and more across the communities people actually live in.</p><div class="hero-actions"><a class="button primary" href="#explore">Explore places</a><a class="button secondary" href="#communities">Browse near communities</a></div></div><div class="hero-card" aria-label="Guide summary"><span class="hero-card-label">LIVE GUIDE</span><strong id="placeCount">—</strong><span>active places</span><div class="stat-row"><span id="cityCount">— cities</span><span id="categoryCount">— categories</span></div><small>Data updates automatically from the maintained local guide.</small></div></div></section>
 
     <section id="explore" class="section shell">
-      <div class="section-heading">
-        <div><p class="eyebrow">EXPLORE</p><h2>Browse places</h2></div>
-        <p>Search by name or filter by city and category.</p>
-      </div>
-
-      <div class="filter-panel">
-        <label class="search-field">
-          <span>Search</span>
-          <input id="searchInput" type="search" placeholder="Try coffee, park, sushi…" autocomplete="off" />
-        </label>
-        <label><span>City</span><select id="cityFilter"><option value="All">All cities</option></select></label>
-        <label><span>Category</span><select id="categoryFilter"><option value="All">All categories</option></select></label>
-        <button id="clearFilters" class="text-button" type="button">Clear filters</button>
-      </div>
-
+      <div class="section-heading"><div><p class="eyebrow">EXPLORE</p><h2>Browse places</h2></div><p>Search by name or filter by city and category. The homepage shows a quick preview; open the full directory for all results.</p></div>
+      <div class="filter-panel"><label class="search-field"><span>Search</span><input id="searchInput" type="search" placeholder="Try coffee, park, sushi…" autocomplete="off" /></label><label><span>City</span><select id="cityFilter"><option value="All">All cities</option></select></label><label><span>Category</span><select id="categoryFilter"><option value="All">All categories</option></select></label><button id="clearFilters" class="text-button" type="button">Clear filters</button></div>
       <div class="results-toolbar"><strong id="resultCount">Loading…</strong><span id="dataStatus">Connecting to live guide…</span></div>
       <div id="placesGrid" class="card-grid" aria-live="polite"></div>
-      <button id="loadMore" class="button secondary load-more" type="button" hidden>Show more</button>
+      <a id="viewAllResults" class="button secondary load-more" href="/search.html">View all results</a>
     </section>
 
-    <section id="communities" class="community-section">
-      <div class="shell">
-        <div class="section-heading light">
-          <div><p class="eyebrow">NEAR COMMUNITIES</p><h2>Explore places near residential communities</h2></div>
-          <p>Builder and community names are used only as geographic reference points. This site is independent and is not owned, operated, sponsored or endorsed by any homebuilder.</p>
-        </div>
+    <section id="communities" class="community-section"><div class="shell"><div class="section-heading light"><div><p class="eyebrow">NEAR COMMUNITIES</p><h2>Explore places near residential communities</h2></div><p>Builder and community names are used only as geographic reference points. This site is independent and is not owned, operated, sponsored or endorsed by any homebuilder.</p></div><div class="community-controls"><label><span>Community</span><select id="communityFilter"><option value="">Choose a community</option></select></label><label><span>Category</span><select id="communityCategoryFilter"><option value="All">All categories</option></select></label></div><div id="communityResults" class="community-grid"></div></div></section>
 
-        <div class="community-controls">
-          <label><span>Community</span><select id="communityFilter"><option value="">Choose a community</option></select></label>
-          <label><span>Category</span><select id="communityCategoryFilter"><option value="All">All categories</option></select></label>
-        </div>
-        <div id="communityResults" class="community-grid"></div>
-      </div>
-    </section>
-
-    <section class="independence-note">
-      <div class="shell independence-card">
-        <div>
-          <p class="eyebrow">INDEPENDENT RESOURCE</p>
-          <h2>Not a builder-branded website.</h2>
-          <p>This guide is independently created and maintained. References to PulteGroup, Pulte Homes, Centex, other builders, and specific community names are used only to identify locations and nearby amenities. No builder has sponsored, endorsed, reviewed, or approved this site unless explicitly stated.</p>
-        </div>
-        <a class="button secondary dark-button" href="disclaimer.html">Read full disclaimer</a>
-      </div>
-    </section>
+    <section class="independence-note"><div class="shell independence-card"><div><p class="eyebrow">INDEPENDENT RESOURCE</p><h2>Not a builder-branded website.</h2><p>This guide is independently created and maintained. References to PulteGroup, Pulte Homes, Centex, other builders, and specific community names are used only to identify locations and nearby amenities. No builder has sponsored, endorsed, reviewed, or approved this site unless explicitly stated.</p></div><a class="button secondary dark-button" href="disclaimer.html">Read full disclaimer</a></div></section>
   </main>
 
-  <footer>
-    <div class="shell footer-inner">
-      <div>
-        <strong>Atlanta + North Georgia Local Guide</strong>
-        <p>Independent local-resource guide. Not owned, operated, sponsored, endorsed, or affiliated with PulteGroup, Pulte Homes, Centex, or any other homebuilder. Builder and community names are used only for identification and geographic reference. All trademarks belong to their respective owners.</p>
-        <p><a href="disclaimer.html">About &amp; Disclaimer</a></p>
-      </div>
-      <a href="#top">Back to top ↑</a>
-    </div>
-  </footer>
-
-  <nav class="mobile-nav" aria-label="Mobile navigation">
-    <a href="#explore">Explore</a>
-    <a href="#communities">Near Communities</a>
-  </nav>
-
+  <footer><div class="shell footer-inner"><div><strong>Atlanta + North Georgia Local Guide</strong><p>Independent local-resource guide. Not owned, operated, sponsored, endorsed, or affiliated with PulteGroup, Pulte Homes, Centex, or any other homebuilder. Builder and community names are used only for identification and geographic reference. All trademarks belong to their respective owners.</p><p><a href="disclaimer.html">About &amp; Disclaimer</a></p></div><a href="#top">Back to top ↑</a></div></footer>
+  <nav class="mobile-nav" aria-label="Mobile navigation"><a href="#explore">Explore</a><a href="#communities">Near Communities</a></nav>
   <script src="app.js" defer></script>
 </body>
 </html>
