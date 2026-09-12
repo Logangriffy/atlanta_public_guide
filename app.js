@@ -3,7 +3,12 @@ const CONFIG = {
   placesSheet: "Places",
   linksSheet: "CommunityLinks",
   homeLimit: 10,
-  communityLimit: 18,
+};
+
+const COMMUNITY_META = {
+  "avery ridge": { brand: "Centex", city: "Gainesville" },
+  "hunters creek": { brand: "Pulte", city: "Flowery Branch" },
+  "reunion": { brand: "Pulte", city: "Flowery Branch" },
 };
 
 const state = { places: [], links: [] };
@@ -49,9 +54,7 @@ async function fetchSheet(sheet) {
   const response = await fetch(csvUrl(sheet), { cache: "no-store" });
   if (!response.ok) throw new Error(`Could not load ${sheet}`);
   const body = await response.text();
-  if (/Sign in|Request access|<!doctype html/i.test(body.slice(0, 700))) {
-    throw new Error(`${sheet} feed is not publicly readable`);
-  }
+  if (/Sign in|Request access|<!doctype html/i.test(body.slice(0, 700))) throw new Error(`${sheet} feed is not publicly readable`);
   return rowsToObjects(parseCSV(body));
 }
 
@@ -66,11 +69,25 @@ function uniqSorted(values) { return [...new Set(values.filter(Boolean))].sort((
 function option(value, label = value) { const el = document.createElement("option"); el.value = value; el.textContent = label; return el; }
 function isActivePlace(place) { const status = norm(place["Place Status"]); return !status || status === "active"; }
 
+function linkedPlaceKeysForCommunity(community) {
+  if (!community || norm(community) === "all") return null;
+  const ids = new Set();
+  const names = new Set();
+  state.links.filter((link) => norm(link.Community) === norm(community)).forEach((link) => {
+    if (text(link["Place ID"])) ids.add(norm(link["Place ID"]));
+    const name = text(link["Place (auto)"]);
+    const city = text(link["City (auto)"]);
+    if (name) names.add(`${norm(name)}|${norm(city)}`);
+  });
+  return { ids, names };
+}
+
 function buildPlaceCard(place) {
   const card = document.createElement("article");
   card.className = "place-card";
   const name = text(place.Place, "Unnamed place");
   const city = text(place.City);
+  const area = text(place["Area / Neighborhood"]);
   const category = placeCategory(place);
   const price = text(place.Price);
   const summary = placeNotes(place);
@@ -79,19 +96,31 @@ function buildPlaceCard(place) {
 
   card.innerHTML = `<div class="card-top"><h3><a class="place-title-link"></a></h3>${price ? '<span class="price"></span>' : ''}</div><div class="meta"></div>${summary ? '<p class="notes"></p>' : ''}<div class="card-actions"></div>`;
   const title = card.querySelector(".place-title-link");
-  title.href = href; title.textContent = name;
+  title.href = href;
+  title.textContent = name;
   if (price) card.querySelector(".price").textContent = price;
-  [city, category].forEach((value, index) => {
+  [category, [city, area].filter(Boolean).join(" · ")].forEach((value, index) => {
     if (!value) return;
     const pill = document.createElement("span");
-    pill.className = index ? "pill category" : "pill";
+    pill.className = index === 0 ? "pill category" : "pill";
     pill.textContent = value;
     card.querySelector(".meta").appendChild(pill);
   });
   if (summary) card.querySelector(".notes").textContent = summary;
   const actions = card.querySelector(".card-actions");
-  const details = document.createElement("a"); details.href = href; details.className = "primary-link"; details.textContent = "View details"; actions.appendChild(details);
-  if (address) { const maps = document.createElement("a"); maps.href = mapLink(address); maps.target = "_blank"; maps.rel = "noopener noreferrer"; maps.textContent = "Map ↗"; actions.appendChild(maps); }
+  const details = document.createElement("a");
+  details.href = href;
+  details.className = "primary-link";
+  details.textContent = "Explore this place";
+  actions.appendChild(details);
+  if (address) {
+    const maps = document.createElement("a");
+    maps.href = mapLink(address);
+    maps.target = "_blank";
+    maps.rel = "noopener noreferrer";
+    maps.textContent = "Map ↗";
+    actions.appendChild(maps);
+  }
   return card;
 }
 
@@ -99,9 +128,17 @@ function filteredPlaces() {
   const query = norm($("searchInput")?.value);
   const selectedCity = norm($("cityFilter")?.value || "All");
   const selectedCategory = norm($("categoryFilter")?.value || "All");
+  const selectedCommunity = text($("placeCommunityFilter")?.value || "All");
+  const linked = linkedPlaceKeysForCommunity(selectedCommunity);
+
   return state.places.filter(isActivePlace).filter((place) => {
     if (selectedCity !== "all" && norm(place.City) !== selectedCity) return false;
     if (selectedCategory !== "all" && norm(placeCategory(place)) !== selectedCategory) return false;
+    if (linked) {
+      const idMatch = text(place["Place ID"]) && linked.ids.has(norm(place["Place ID"]));
+      const nameMatch = linked.names.has(`${norm(place.Place)}|${norm(place.City)}`);
+      if (!idMatch && !nameMatch) return false;
+    }
     if (!query) return true;
     return norm([place.Place, place.City, place.Category, place["Public Category (Auto)"], place["Area / Neighborhood"], place["Tags / Best For"], place["Client Notes"], place.Address].join(" ")).includes(query);
   });
@@ -113,11 +150,13 @@ function renderPlaces() {
   const results = filteredPlaces();
   grid.replaceChildren();
   results.slice(0, CONFIG.homeLimit).forEach((place) => grid.appendChild(buildPlaceCard(place)));
-  const count = $("resultCount");
-  if (count) count.textContent = `${results.length.toLocaleString()} place${results.length === 1 ? "" : "s"}${results.length > CONFIG.homeLimit ? ` · showing first ${CONFIG.homeLimit}` : ""}`;
   if (!results.length) {
-    const empty = document.createElement("div"); empty.className = "empty-state"; empty.textContent = "No places match those filters yet."; grid.appendChild(empty);
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "No places match those filters yet.";
+    grid.appendChild(empty);
   }
+  if ($("resultCount")) $("resultCount").textContent = `${results.length.toLocaleString()} place${results.length === 1 ? "" : "s"} to discover`;
   const viewAll = $("viewAllResults");
   if (viewAll) {
     const url = new URL("/search.html", location.origin);
@@ -126,78 +165,77 @@ function renderPlaces() {
     if (city && norm(city) !== "all") url.searchParams.set("city", city);
     if (category && norm(category) !== "all") url.searchParams.set("category", category);
     viewAll.href = url.pathname + url.search;
-    viewAll.textContent = results.length > CONFIG.homeLimit ? `View all ${results.length.toLocaleString()} results →` : "Open full directory →";
+    viewAll.textContent = results.length > CONFIG.homeLimit ? `View more places` : "Browse all places";
   }
 }
 
-function communityStatus(link) {
-  const minutes = text(link["Drive minutes"]);
-  if (minutes) return `${minutes} min · Route verified`;
-  if (/verified/i.test(text(link["Link status"]))) return "Route verified";
-  return "Surrounding area";
+function renderCityLinks() {
+  const wrap = $("cityLinks");
+  if (!wrap) return;
+  wrap.replaceChildren();
+  uniqSorted(state.places.filter(isActivePlace).map((place) => text(place.City))).forEach((city) => {
+    const link = document.createElement("a");
+    link.href = `/search.html?city=${encodeURIComponent(city)}`;
+    link.textContent = city;
+    wrap.appendChild(link);
+  });
 }
 
-function renderCommunities() {
-  const grid = $("communityResults");
-  if (!grid) return;
-  grid.replaceChildren();
-  const community = text($("communityFilter")?.value);
-  const category = text($("communityCategoryFilter")?.value || "All");
-  if (!community) { const empty = document.createElement("div"); empty.className = "empty-state"; empty.textContent = "Choose a community to see nearby places."; grid.appendChild(empty); return; }
-
-  const communityKey = norm(community), categoryKey = norm(category);
-  const byId = new Map(state.places.map((place) => [norm(place["Place ID"]), place]));
-  const byNameCity = new Map(state.places.map((place) => [`${norm(place.Place)}|${norm(place.City)}`, place]));
-
-  let links = state.links.filter((link) => norm(link.Community) === communityKey && norm(link["Place status (auto)"] || "Active") !== "inactive");
-  if (categoryKey !== "all") {
-    links = links.filter((link) => {
-      if (norm(link["Use category"]) === categoryKey) return true;
-      const place = byId.get(norm(link["Place ID"])) || byNameCity.get(`${norm(link["Place (auto)"])}|${norm(link["City (auto)"])}`);
-      return place && norm(placeCategory(place)) === categoryKey;
-    });
-  }
-  links = links.slice(0, CONFIG.communityLimit);
-
-  for (const link of links) {
-    const place = byId.get(norm(link["Place ID"])) || byNameCity.get(`${norm(link["Place (auto)"])}|${norm(link["City (auto)"])}`);
-    const name = place ? text(place.Place) : text(link["Place (auto)"], "Place");
-    const city = place ? text(place.City) : text(link["City (auto)"]);
-    const displayCategory = text(link["Use category"], place ? placeCategory(place) : "");
-    const summary = text(link["Client note (auto)"], place ? placeNotes(place) : "");
+function renderFeaturedCommunities() {
+  const wrap = $("featuredCommunities");
+  if (!wrap) return;
+  wrap.replaceChildren();
+  const communities = uniqSorted(state.links.map((link) => text(link.Community))).slice(0, 6);
+  communities.forEach((community) => {
+    const links = state.links.filter((link) => norm(link.Community) === norm(community));
+    const uniquePlaces = new Set(links.map((link) => text(link["Place ID"], `${text(link["Place (auto)"])}|${text(link["City (auto)"])}`)).filter(Boolean));
+    const meta = COMMUNITY_META[norm(community)] || {};
+    const brand = text(links[0]?.Brand, text(links[0]?.Builder, meta.brand || "New homes"));
+    const city = text(links[0]?.["Community City"], text(links[0]?.["City"], meta.city || text(links[0]?.["City (auto)"])));
     const card = document.createElement("article");
-    card.className = "community-card";
-    const href = place ? `/place.html?slug=${encodeURIComponent(placeSlug(place))}` : "";
-    card.innerHTML = `<h3>${href ? '<a class="place-title-link"></a>' : '<span class="place-title-text"></span>'}</h3><div class="meta"></div><span class="status"></span>${summary ? '<p class="community-notes"></p>' : ''}${href ? '<a class="community-detail-link"></a>' : ''}`;
-    const titleNode = card.querySelector(".place-title-link") || card.querySelector(".place-title-text");
-    titleNode.textContent = name;
-    if (href) titleNode.href = href;
-    card.querySelector(".status").textContent = communityStatus(link);
-    if (summary) card.querySelector(".community-notes").textContent = summary;
-    [city, displayCategory].forEach((value, index) => { if (!value) return; const pill = document.createElement("span"); pill.className = index ? "pill category" : "pill"; pill.textContent = value; card.querySelector(".meta").appendChild(pill); });
-    const detail = card.querySelector(".community-detail-link"); if (detail) { detail.href = href; detail.textContent = "View details →"; }
-    grid.appendChild(card);
-  }
-
-  if (!links.length) {
-    const empty = document.createElement("div"); empty.className = "empty-state"; empty.textContent = "No matching linked places yet for this community and category."; grid.appendChild(empty);
+    card.className = "featured-community-card";
+    card.innerHTML = `<span class="builder-line"></span><h3></h3><p></p><a href="#explore">Get to know the neighborhood →</a>`;
+    card.querySelector(".builder-line").textContent = [brand, city].filter(Boolean).join(" · ");
+    card.querySelector("h3").textContent = community;
+    card.querySelector("p").textContent = `${uniquePlaces.size.toLocaleString()} places to explore in the area`;
+    card.querySelector("a").addEventListener("click", () => {
+      const filter = $("placeCommunityFilter");
+      if (filter) { filter.value = community; renderPlaces(); }
+    });
+    wrap.appendChild(card);
+  });
+  if (!communities.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "Community guides are being added.";
+    wrap.appendChild(empty);
   }
 }
 
 function populateFilters() {
-  uniqSorted(state.places.filter(isActivePlace).map((place) => text(place.City))).forEach((value) => $("cityFilter")?.appendChild(option(value)));
-  uniqSorted(state.places.filter(isActivePlace).map(placeCategory)).forEach((value) => $("categoryFilter")?.appendChild(option(value)));
-  uniqSorted(state.links.map((link) => text(link.Community))).forEach((value) => $("communityFilter")?.appendChild(option(value)));
-  uniqSorted(state.links.map((link) => text(link["Use category"]))).forEach((value) => $("communityCategoryFilter")?.appendChild(option(value)));
-  if ($("placeCount")) $("placeCount").textContent = state.places.filter(isActivePlace).length.toLocaleString();
-  if ($("cityCount")) $("cityCount").textContent = `${uniqSorted(state.places.filter(isActivePlace).map((p) => text(p.City))).length} cities`;
-  if ($("categoryCount")) $("categoryCount").textContent = `${uniqSorted(state.places.filter(isActivePlace).map(placeCategory).length ? state.places.filter(isActivePlace).map(placeCategory) : []).length} categories`;
+  const active = state.places.filter(isActivePlace);
+  const cities = uniqSorted(active.map((place) => text(place.City)));
+  const categories = uniqSorted(active.map(placeCategory));
+  const communities = uniqSorted(state.links.map((link) => text(link.Community)));
+  cities.forEach((value) => $("cityFilter")?.appendChild(option(value)));
+  categories.forEach((value) => $("categoryFilter")?.appendChild(option(value)));
+  communities.forEach((value) => $("placeCommunityFilter")?.appendChild(option(value)));
+  if ($("placeCount")) $("placeCount").textContent = active.length.toLocaleString();
+  if ($("cityCountNumber")) $("cityCountNumber").textContent = cities.length.toLocaleString();
 }
 
 function bindEvents() {
-  ["searchInput", "cityFilter", "categoryFilter"].forEach((id) => { const el = $(id); if (el) el.addEventListener(id === "searchInput" ? "input" : "change", renderPlaces); });
-  $("clearFilters")?.addEventListener("click", () => { $("searchInput").value = ""; $("cityFilter").value = "All"; $("categoryFilter").value = "All"; renderPlaces(); });
-  ["communityFilter", "communityCategoryFilter"].forEach((id) => $(id)?.addEventListener("change", renderCommunities));
+  ["searchInput", "cityFilter", "categoryFilter", "placeCommunityFilter"].forEach((id) => {
+    const el = $(id);
+    if (el) el.addEventListener(id === "searchInput" ? "input" : "change", renderPlaces);
+  });
+  $("clearFilters")?.addEventListener("click", () => {
+    if ($("searchInput")) $("searchInput").value = "";
+    if ($("cityFilter")) $("cityFilter").value = "All";
+    if ($("categoryFilter")) $("categoryFilter").value = "All";
+    if ($("placeCommunityFilter")) $("placeCommunityFilter").value = "All";
+    renderPlaces();
+  });
 }
 
 async function init() {
@@ -208,14 +246,20 @@ async function init() {
     state.links = links.filter((link) => text(link.Community) && (text(link["Place ID"]) || text(link["Place (auto)"])));
     populateFilters();
     renderPlaces();
-    renderCommunities();
-    if ($("dataStatus")) $("dataStatus").textContent = "Live data connected";
+    renderCityLinks();
+    renderFeaturedCommunities();
+    if ($("dataStatus")) $("dataStatus").textContent = "Live guide connected";
   } catch (error) {
     console.error(error);
     if ($("dataStatus")) $("dataStatus").textContent = "Data feed unavailable";
     if ($("resultCount")) $("resultCount").textContent = "Could not load guide";
     const grid = $("placesGrid");
-    if (grid) { const empty = document.createElement("div"); empty.className = "empty-state"; empty.textContent = "The live directory could not load. Please refresh in a moment."; grid.replaceChildren(empty); }
+    if (grid) {
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "The live directory could not load. Please refresh in a moment.";
+      grid.replaceChildren(empty);
+    }
   }
 }
 
