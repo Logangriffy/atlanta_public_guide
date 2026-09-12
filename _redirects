@@ -2,3 +2,4 @@
 /communities /community.html?slug=all 200
 /communities/ /community.html?slug=all 200
 /communities/* /community.html?slug=:splat 200
+/places/* /place.html?slug=:splat 200
