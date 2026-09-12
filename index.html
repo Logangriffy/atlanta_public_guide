@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f7f3ec" />
+  <meta name="theme-color" content="#ffffff" />
   <meta name="description" content="Atlanta Local Guide: restaurants, outdoors, things to do, coffee, shopping and new-home community context across Atlanta and North Georgia." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Atlanta Local Guide" />
@@ -13,124 +13,118 @@
   <link rel="manifest" href="/site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260912-artifact3" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=20260912-match1" />
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="shell nav-wrap">
-      <a class="brand brand-local" href="/" aria-label="Atlanta Local home">
-        <span class="brand-mark brand-mark-local">A</span>
-        <span class="brand-copy"><strong>ATLANTA LOCAL GUIDE</strong><small>Atlanta &amp; North Georgia</small></span>
+      <a class="brand" href="/" aria-label="Atlanta Local home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.8 8.2-2.1 5.5-5.5 2.1 2.1-5.5 5.5-2.1Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.35" fill="currentColor"/></svg>
+        </span>
+        <span class="brand-copy"><strong>ATLANTA</strong><small>LOCAL GUIDE</small></span>
       </a>
       <nav class="desktop-nav" aria-label="Primary navigation">
         <a href="#explore">Explore &amp; search</a>
         <a href="#communities">New-home communities</a>
-        <a href="#connect">Connect with Logan</a>
+        <a class="header-cta" href="#connect">Connect with Logan <span>↗</span></a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="editorial-hero" id="top">
-      <div class="shell hero-layout">
+    <section class="hero" id="top">
+      <div class="shell hero-grid">
         <div class="hero-copy-block">
-          <p class="eyebrow dark">ATLANTA &amp; NORTH GEORGIA</p>
+          <p class="eyebrow"><span></span>ATLANTA &amp; NORTH GEORGIA</p>
           <h1>Find your weekend.<br><em>Find your place.</em></h1>
           <p class="hero-lede">The dinner spot. The Saturday adventure. The neighborhood that feels like you. Get to know life around Atlanta, one local find at a time.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#explore">Explore the guide</a>
-            <a class="button ghost" href="#communities">Find a community</a>
+            <a class="button primary" href="#explore">Explore the guide <span>→</span></a>
+            <a class="button text-button-link" href="#communities">Find a community <span>↗</span></a>
           </div>
           <div class="hero-stats" aria-label="Guide statistics">
             <div><strong id="placeCount">—</strong><span>local places</span></div>
-            <span class="stat-divider" aria-hidden="true"></span>
+            <i aria-hidden="true"></i>
             <div><strong id="cityCountNumber">—</strong><span>cities to explore</span></div>
           </div>
         </div>
 
         <figure class="hero-photo-card">
           <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Atlanta_Skyline_-_Piedmont_Park.png" alt="Atlanta Midtown skyline reflected in the lake at Piedmont Park" />
-          <figcaption><span>Piedmont Park</span><span>Atlanta</span></figcaption>
+          <div class="hero-badge"><span>A PLACE TO</span><em>belong.</em></div>
+          <figcaption><span class="pin">⌾</span> Piedmont Park · Atlanta</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="category-strip" aria-label="Browse by category">
-      <div class="shell category-strip-inner">
-        <div class="category-intro"><p class="eyebrow">A PLACE TO</p><h2>belong.</h2></div>
-        <div class="category-links">
-          <a href="/search.html?category=Restaurants">Restaurants <span>↗</span></a>
-          <a href="/search.html?category=Outdoors%20%26%20Parks">Outdoors &amp; Parks <span>↗</span></a>
-          <a href="/search.html?category=Things%20to%20Do">Things to Do <span>↗</span></a>
-          <a href="/search.html?category=Coffee%20%26%20Dessert">Coffee &amp; Dessert <span>↗</span></a>
-          <a href="/search.html?category=Shopping">Shopping <span>↗</span></a>
-        </div>
+      <div class="shell category-links">
+        <a href="/search.html?category=Restaurants"><span class="category-icon">♜</span><span>Restaurants</span><b>↗</b></a>
+        <a href="/search.html?category=Outdoors%20%26%20Parks"><span class="category-icon">♧</span><span>Outdoors &amp; Parks</span><b>↗</b></a>
+        <a href="/search.html?category=Things%20to%20Do"><span class="category-icon">◎</span><span>Things to Do</span><b>↗</b></a>
+        <a href="/search.html?category=Coffee%20%26%20Dessert"><span class="category-icon">☕</span><span>Coffee &amp; Dessert</span><b>↗</b></a>
+        <a href="/search.html?category=Shopping"><span class="category-icon">▢</span><span>Shopping</span><b>↗</b></a>
       </div>
     </section>
 
-    <section id="explore" class="section places-section">
+    <section id="explore" class="places-section">
       <div class="shell">
-        <div class="editorial-heading">
-          <div><p class="eyebrow dark">YOUR NEXT LOCAL FIND</p><h2>Good places.<br><em>Great possibilities.</em></h2></div>
-          <a class="text-link" href="/search.html">Browse all places <span>→</span></a>
+        <div class="section-heading-row">
+          <div><p class="section-kicker">YOUR NEXT LOCAL FIND</p><h2>Good places. Great possibilities.</h2></div>
+          <a class="plain-link" href="/search.html">Browse all places <span>→</span></a>
         </div>
 
-        <div class="filter-panel filter-panel-editorial">
-          <label class="search-field"><span>Search places</span><input id="searchInput" type="search" placeholder="Search places" autocomplete="off" /></label>
-          <label><span>City</span><select id="cityFilter"><option value="All">All cities</option></select></label>
-          <label><span>Category</span><select id="categoryFilter"><option value="All">All categories</option></select></label>
-          <label><span>Community</span><select id="placeCommunityFilter"><option value="All">All communities</option></select></label>
-          <button id="clearFilters" class="filter-clear" type="button">Clear</button>
+        <div class="filter-panel">
+          <label class="filter-search"><span class="sr-only">Search places</span><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="A place, a city, something to do..." autocomplete="off" /></label>
+          <label><span class="sr-only">City</span><select id="cityFilter"><option value="All">All cities</option></select></label>
+          <label><span class="sr-only">Category</span><select id="categoryFilter"><option value="All">All categories</option></select></label>
+          <label><span class="sr-only">Community</span><select id="placeCommunityFilter"><option value="All">All communities</option></select></label>
         </div>
 
-        <div class="results-toolbar editorial-toolbar"><strong id="resultCount">Loading places…</strong><span id="dataStatus">Connecting to guide…</span></div>
-        <div id="placesGrid" class="card-grid editorial-card-grid" aria-live="polite"></div>
-        <div class="load-more-wrap"><a id="viewAllResults" class="button outline" href="/search.html">View more places</a></div>
+        <div class="results-line"><strong id="resultCount">Loading places…</strong><span id="dataStatus" class="sr-only">Connecting to guide…</span></div>
+        <div id="placesGrid" class="place-grid" aria-live="polite"></div>
+        <div class="more-wrap"><a id="viewAllResults" class="button outline" href="/search.html">View more places <span>→</span></a><small id="showingCount">Showing 10</small></div>
       </div>
     </section>
 
-    <section class="cities-section">
-      <div class="shell cities-layout">
-        <div class="cities-heading"><p class="eyebrow">GET TO KNOW THE AREA</p><h2>So many ways<br>to feel <em>at home.</em></h2><p>Start with a city. Find the places that make it yours.</p></div>
+    <section class="cities-wrap">
+      <div class="shell cities-panel">
+        <div class="cities-intro"><p class="section-kicker">GET TO KNOW THE AREA</p><h2>So many ways<br>to feel at home.</h2><p>Start with a city. Find the places that make it yours.</p></div>
         <div id="cityLinks" class="city-links" aria-label="Browse cities"></div>
       </div>
     </section>
 
-    <section id="communities" class="community-showcase">
+    <section id="communities" class="community-section">
       <div class="shell">
-        <div class="editorial-heading community-heading">
-          <div><p class="eyebrow dark">MORE THAN AN ADDRESS</p><h2>A new home.<br><em>A whole new neighborhood.</em></h2></div>
-          <a class="text-link" href="/communities.html">All communities <span>→</span></a>
+        <div class="section-heading-row community-heading">
+          <div><p class="section-kicker">MORE THAN AN ADDRESS</p><h2>A new home. A whole new neighborhood.</h2></div>
+          <a class="plain-link" href="/communities/">All communities <span>→</span></a>
         </div>
-        <div id="featuredCommunities" class="featured-community-grid" aria-live="polite"></div>
+        <div id="featuredCommunities" class="community-grid" aria-live="polite"></div>
       </div>
     </section>
 
     <section id="connect" class="connect-section">
       <div class="shell connect-card">
-        <div><p class="eyebrow">FIND YOUR PLACE HERE</p><h2>Love the area?<br><em>Let’s talk about living here.</em></h2><p>Connect with Logan to explore new-home communities and plan a visit that fits what you’re looking for.</p></div>
-        <a class="button light" href="/communities.html">Plan a community visit <span>→</span></a>
+        <div><p class="section-kicker light">FIND YOUR PLACE HERE</p><h2>Love the area?<br>Let’s talk about living here.</h2><p>Connect with Logan to explore new-home communities and plan a visit that fits what you’re looking for.</p></div>
+        <a class="button light" href="/communities/">Plan a community visit <span>↗</span></a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer-new">
-    <div class="shell footer-grid">
-      <div class="footer-brand-block"><a class="brand footer-brand" href="/"><span class="brand-mark brand-mark-local">A</span><span><strong>Atlanta Local</strong><small>A little local knowledge. A whole new place to call home.</small></span></a></div>
+  <footer class="site-footer">
+    <div class="shell footer-main">
+      <div><h2>Atlanta Local</h2><p>A little local knowledge.<br>A whole new place to call home.</p></div>
       <div class="footer-links"><a href="#explore">Explore the guide</a><a href="#communities">New-home communities</a><a href="#connect">Connect with Logan</a></div>
       <div class="footer-meta"><strong>Atlanta &amp; North Georgia</strong><span>Local guide by Logan Griffiths</span><span>Pulte new-home sales consultant</span></div>
     </div>
-    <div class="shell footer-bottom">
-      <p>Community associations describe area context. Verify hours, prices and routes with official sources. This is Logan’s guide, not an official PulteGroup website.</p>
-      <a href="/disclaimer.html">Privacy</a>
-      <p class="photo-credit">Skyline photo: seanpinto / Wikimedia Commons · CC BY 2.0 · Cropped.</p>
-    </div>
+    <div class="shell footer-bottom"><p>Community associations describe area context. Verify hours, prices and routes with official sources. This is Logan’s guide, not an official PulteGroup website.</p><a href="/disclaimer.html">Privacy</a><p class="credit">Skyline photo: <a href="https://commons.wikimedia.org/wiki/File:Atlanta_Skyline_-_Piedmont_Park.png" target="_blank" rel="noopener noreferrer">seanpinto / Wikimedia Commons</a> · CC BY 2.0 · Cropped.</p></div>
   </footer>
 
-  <nav class="mobile-nav" aria-label="Mobile navigation"><a href="#explore">Explore</a><a href="#communities">Communities</a><a href="#connect">Connect</a></nav>
-  <script src="/app.js?v=20260912-artifact3" defer></script>
+  <script src="/app.js?v=20260912-match1" defer></script>
 </body>
 </html>
