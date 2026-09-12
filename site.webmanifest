@@ -1,9 +1,9 @@
 {
-  "name": "Atlanta + North Georgia Local Guide",
-  "short_name": "North Georgia Guide",
-  "description": "Independent local guide to places, activities, services and amenities across Atlanta and North Georgia.",
+  "name": "Atlanta Local by Logan",
+  "short_name": "Atlanta Local",
+  "description": "Independent local guide, relocation resource and personal recommendations across Atlanta and North Georgia.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f7f2e8",
-  "theme_color": "#274b3a"
+  "background_color": "#ffffff",
+  "theme_color": "#1238c8"
 }
