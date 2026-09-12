@@ -1,5 +1,5 @@
 /cities/* /city.html?slug=:splat 200
-/communities /community.html?slug=all 200
-/communities/ /community.html?slug=all 200
-/communities/* /community.html?slug=:splat 200
+/communities /moving.html 301
+/communities/ /moving.html 301
+/communities/* /moving.html 301
 /places/* /place.html?slug=:splat 200
