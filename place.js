@@ -1,7 +1,7 @@
 const CONFIG={placesSheet:"Places"};
 const $=id=>document.getElementById(id);const text=(v,f="")=>String(v??f).trim();const norm=v=>text(v).normalize("NFKC").replace(/\s+/g," ").toLowerCase();
 function slugify(v){return text(v).toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/&/g," and ").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
-function placeSlug(p){return `${slugify(p.Place)}-${slugify(p.City)}`}
+function placeSlug(p){return slugify(text(p["URL Slug"])||`${text(p.Place)}-${text(p.City)}`)}
 function paramSlug(){const p=new URLSearchParams(location.search);return p.get("slug")||p.get("id")||location.pathname.split("/").filter(Boolean).pop()||""}
 function mapLink(address){return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
 function isActive(p){const s=norm(p["Place Status"]);return !s||s==="active"}
