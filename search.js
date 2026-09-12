@@ -18,7 +18,7 @@ function isActive(place){const status=norm(place["Place Status"]);return !status
 
 function buildCard(place){
   const card=document.createElement("article");card.className="place-card";
-  const city=text(place.City),cat=category(place),price=text(place.Price),summary=notes(place),address=text(place.Address),website=text(place["Website / Source"]),href=`/place.html?slug=${encodeURIComponent(placeSlug(place))}`;
+  const city=text(place.City),cat=category(place),price=text(place.Price),summary=notes(place),address=text(place.Address),website=text(place["Website / Source"]),href=`/places/${encodeURIComponent(placeSlug(place))}`;
   card.innerHTML=`<div class="card-top"><h3><a class="place-title-link"></a></h3>${price?'<span class="price"></span>':''}</div><div class="meta"></div>${summary?'<p class="notes"></p>':''}<div class="card-actions"></div>`;
   const title=card.querySelector(".place-title-link");title.textContent=text(place.Place,"Unnamed place");title.href=href;if(price)card.querySelector(".price").textContent=price;
   [city,cat].forEach((value,index)=>{if(!value)return;const pill=document.createElement("span");pill.className=index?"pill category":"pill";pill.textContent=value;card.querySelector(".meta").appendChild(pill);});
