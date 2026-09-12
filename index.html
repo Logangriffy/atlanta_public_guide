@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0c2740" />
+  <meta name="description" content="A local guide to restaurants, activities, shopping, parks and everyday essentials across Atlanta and North Georgia." />
+  <title>Atlanta + North Georgia Local Guide</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell nav-wrap">
+      <a class="brand" href="#top" aria-label="Atlanta and North Georgia Local Guide home">
+        <span class="brand-mark">NG</span>
+        <span><strong>Atlanta + North Georgia</strong><small>Local Guide</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#explore">Explore</a>
+        <a href="#communities">Near Communities</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">LOCAL PLACES. PRACTICAL INFO. EASY TO BROWSE.</p>
+          <h1>Find your next favorite place in Atlanta &amp; North Georgia.</h1>
+          <p class="hero-copy">Explore restaurants, coffee, parks, shopping, family activities, healthcare, everyday essentials and more across the communities people actually live in.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#explore">Explore places</a>
+            <a class="button secondary" href="#communities">Browse near communities</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Guide summary">
+          <span class="hero-card-label">LIVE GUIDE</span>
+          <strong id="placeCount">—</strong>
+          <span>active places</span>
+          <div class="stat-row"><span id="cityCount">— cities</span><span id="categoryCount">— categories</span></div>
+          <small>Data updates automatically from the maintained local guide.</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="explore" class="section shell">
+      <div class="section-heading">
+        <div><p class="eyebrow">EXPLORE</p><h2>Browse places</h2></div>
+        <p>Search by name or filter by city and category.</p>
+      </div>
+
+      <div class="filter-panel">
+        <label class="search-field">
+          <span>Search</span>
+          <input id="searchInput" type="search" placeholder="Try coffee, park, sushi…" autocomplete="off" />
+        </label>
+        <label><span>City</span><select id="cityFilter"><option value="All">All cities</option></select></label>
+        <label><span>Category</span><select id="categoryFilter"><option value="All">All categories</option></select></label>
+        <button id="clearFilters" class="text-button" type="button">Clear filters</button>
+      </div>
+
+      <div class="results-toolbar"><strong id="resultCount">Loading…</strong><span id="dataStatus">Connecting to live guide…</span></div>
+      <div id="placesGrid" class="card-grid" aria-live="polite"></div>
+      <button id="loadMore" class="button secondary load-more" type="button" hidden>Show more</button>
+    </section>
+
+    <section id="communities" class="community-section">
+      <div class="shell">
+        <div class="section-heading light">
+          <div><p class="eyebrow">NEAR COMMUNITIES</p><h2>Explore around a Pulte / Centex community</h2></div>
+          <p>Community associations provide useful geographic context. Exact route times are only shown when verified.</p>
+        </div>
+
+        <div class="community-controls">
+          <label><span>Community</span><select id="communityFilter"><option value="">Choose a community</option></select></label>
+          <label><span>Category</span><select id="communityCategoryFilter"><option value="All">All categories</option></select></label>
+        </div>
+        <div id="communityResults" class="community-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div><strong>Atlanta + North Georgia Local Guide</strong><p>Independent local-resource guide. Listings are not endorsements by Pulte, Centex or any builder.</p></div>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <a href="#explore">Explore</a>
+    <a href="#communities">Near Communities</a>
+  </nav>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
