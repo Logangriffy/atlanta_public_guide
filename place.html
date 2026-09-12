@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#274b3a" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta id="metaDescription" name="description" content="Place details from the Atlanta + North Georgia Independent Local Guide." />
+  <link id="canonicalLink" rel="canonical" href="/place.html" />
+  <meta property="og:type" content="website" />
+  <meta id="ogTitle" property="og:title" content="Atlanta + North Georgia Local Guide" />
+  <meta id="ogDescription" property="og:description" content="Independent local place guide." />
+  <meta id="ogUrl" property="og:url" content="" />
+  <title>Place | Atlanta + North Georgia Local Guide</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="place-page">
+  <header class="site-header">
+    <div class="shell nav-wrap">
+      <a class="brand" href="/" aria-label="Atlanta and North Georgia Local Guide home">
+        <span class="brand-mark">NG</span>
+        <span><strong>Atlanta + North Georgia</strong><small>Independent Local Guide</small></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="/search.html">Explore</a>
+        <a href="/#communities">Near Communities</a>
+        <a href="/disclaimer.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="placeMain" class="place-main">
+    <div class="shell place-shell">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>›</span><a href="/search.html">Explore</a><span>›</span><span id="breadcrumbName">Place</span>
+      </nav>
+
+      <div id="placeLoading" class="place-loading">Loading place details…</div>
+
+      <article id="placeContent" hidden>
+        <header class="place-hero-block">
+          <div>
+            <div id="placePills" class="meta"></div>
+            <h1 id="placeName"></h1>
+            <p id="placeSummary" class="place-summary"></p>
+          </div>
+          <div id="placeActions" class="place-actions"></div>
+        </header>
+
+        <div class="place-layout">
+          <section class="place-primary">
+            <div class="detail-section">
+              <h2>About</h2>
+              <p id="aboutText"></p>
+            </div>
+
+            <div class="detail-section">
+              <h2>Details</h2>
+              <dl id="factsGrid" class="facts-grid"></dl>
+            </div>
+
+            <div id="tagsSection" class="detail-section" hidden>
+              <h2>Good for</h2>
+              <div id="tagList" class="tag-list"></div>
+            </div>
+
+            <div id="communitySection" class="detail-section" hidden>
+              <h2>Nearby community context</h2>
+              <div id="communityList" class="community-detail-list"></div>
+              <p class="fine-print">Community names are shown only as geographic reference points. This guide is independent and is not sponsored or endorsed by any homebuilder.</p>
+            </div>
+          </section>
+
+          <aside class="place-sidebar">
+            <div class="sidebar-card">
+              <h2>Plan your visit</h2>
+              <div id="visitDetails"></div>
+            </div>
+          </aside>
+        </div>
+
+        <section id="relatedSection" class="detail-section related-section" hidden>
+          <div class="section-heading compact"><div><p class="eyebrow">KEEP EXPLORING</p><h2>More nearby</h2></div></div>
+          <div id="relatedGrid" class="card-grid"></div>
+        </section>
+      </article>
+
+      <div id="placeError" class="empty-state" hidden>
+        <strong>We couldn’t find that place.</strong><br />
+        <a href="/search.html">Browse the full guide</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div>
+        <strong>Atlanta + North Georgia Local Guide</strong>
+        <p>Independent local-resource guide. Builder and community names are used only for identification and geographic reference.</p>
+      </div>
+      <a href="/disclaimer.html">About &amp; Disclaimer</a>
+    </div>
+  </footer>
+
+  <script src="/place.js" defer></script>
+</body>
+</html>
