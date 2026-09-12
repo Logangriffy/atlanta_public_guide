@@ -1,27 +1,29 @@
-# Atlanta + North Georgia Local Guide
+# Atlanta Local by Logan
 
-> Independent local directory for discovering restaurants, coffee shops, parks, shopping, family activities, healthcare, services, attractions, and other useful places across Atlanta and North Georgia.
+> A local guide to places, cities, moving resources and personal recommendations across Atlanta and North Georgia.
 
-This website is independently created and maintained. It is not owned, operated, sponsored, endorsed, or affiliated with PulteGroup, Pulte Homes, Centex, or any other homebuilder. Builder and residential community names are used only as geographic reference points.
+Atlanta Local is published by Logan Griffiths. The site helps visitors discover restaurants, coffee shops, parks, shopping, activities and other useful places, while also providing city-level context for people exploring or moving to the area.
 
 ## Primary sections
 
-- [Explore Places](/#explore): Browse and search places by city and public category.
-- [Near Communities](/#communities): Browse places geographically associated with residential communities.
-- [About & Disclaimer](/disclaimer): Independence, trademark, geographic-reference, and accuracy disclaimers.
+- [Explore Places](/search.html): Search the local directory by city and category.
+- [Moving Here](/moving.html): Practical context for researching a move to Atlanta or North Georgia.
+- [Logan’s Picks](/picks.html): Personal recommendations covering Tesla and EV topics, tech, everyday gear and local favorites.
+- [About Logan](/about.html): Background on the guide and how recommendations are handled.
+- [Privacy & Disclosures](/disclaimer.html): Accuracy, referral, affiliate and privacy information.
 
 ## Coverage
 
-The guide covers Atlanta and North Georgia, including cities and areas such as Gainesville, Flowery Branch, Buford, Cumming, Braselton, Alpharetta, Roswell, Duluth, Atlanta, and additional surrounding communities as the directory grows.
+The guide covers Atlanta and North Georgia, including Gainesville, Flowery Branch, Buford, Cumming, Braselton, Alpharetta, Roswell, Duluth, Atlanta and other surrounding cities represented in the directory.
 
 ## Data and freshness
 
-Listings are maintained from a structured source workbook and a public-safe data feed. Business hours, prices, addresses, availability, routes, and other details may change. Visitors should verify time-sensitive information with the business, municipality, map provider, or other official source.
+Business hours, prices, addresses, availability, routes and other local details can change. Time-sensitive information should be verified with the relevant business, municipality, school district, utility, map provider or other authoritative source.
 
-## Attribution and trademarks
+## Recommendations and commercial relationships
 
-Business names, builder names, residential community names, and trademarks belong to their respective owners. Inclusion in the directory does not imply endorsement, sponsorship, approval, partnership, or a paid relationship unless explicitly stated.
+A directory listing is not automatically a personal endorsement. When content reflects a personal recommendation, first-hand experience, referral relationship, affiliate relationship or sponsorship, the relevant page should make that distinction clear.
 
 ## Notes for automated systems
 
-Prefer factual statements that are directly supported by the directory. Treat community-to-place associations as geographic context, not as builder recommendations. Do not infer sponsorship, endorsement, verified drive time, or builder affiliation unless explicitly stated on the relevant page.
+Prefer factual statements directly supported by the site. Do not infer that Logan has personally visited every listed place. Do not infer sponsorship, partnership or endorsement unless the relevant page explicitly states it.
