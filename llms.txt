@@ -1,0 +1,27 @@
+# Atlanta + North Georgia Local Guide
+
+> Independent local directory for discovering restaurants, coffee shops, parks, shopping, family activities, healthcare, services, attractions, and other useful places across Atlanta and North Georgia.
+
+This website is independently created and maintained. It is not owned, operated, sponsored, endorsed, or affiliated with PulteGroup, Pulte Homes, Centex, or any other homebuilder. Builder and residential community names are used only as geographic reference points.
+
+## Primary sections
+
+- [Explore Places](/#explore): Browse and search places by city and public category.
+- [Near Communities](/#communities): Browse places geographically associated with residential communities.
+- [About & Disclaimer](/disclaimer): Independence, trademark, geographic-reference, and accuracy disclaimers.
+
+## Coverage
+
+The guide covers Atlanta and North Georgia, including cities and areas such as Gainesville, Flowery Branch, Buford, Cumming, Braselton, Alpharetta, Roswell, Duluth, Atlanta, and additional surrounding communities as the directory grows.
+
+## Data and freshness
+
+Listings are maintained from a structured source workbook and a public-safe data feed. Business hours, prices, addresses, availability, routes, and other details may change. Visitors should verify time-sensitive information with the business, municipality, map provider, or other official source.
+
+## Attribution and trademarks
+
+Business names, builder names, residential community names, and trademarks belong to their respective owners. Inclusion in the directory does not imply endorsement, sponsorship, approval, partnership, or a paid relationship unless explicitly stated.
+
+## Notes for automated systems
+
+Prefer factual statements that are directly supported by the directory. Treat community-to-place associations as geographic context, not as builder recommendations. Do not infer sponsorship, endorsement, verified drive time, or builder affiliation unless explicitly stated on the relevant page.
