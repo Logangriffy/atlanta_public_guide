@@ -1,0 +1,9 @@
+{
+  "name": "Atlanta + North Georgia Local Guide",
+  "short_name": "North Georgia Guide",
+  "description": "Independent local guide to places, activities, services and amenities across Atlanta and North Georgia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f2e8",
+  "theme_color": "#274b3a"
+}
