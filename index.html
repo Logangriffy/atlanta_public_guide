@@ -8,14 +8,16 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Atlanta Local by Logan" />
   <meta property="og:description" content="Find your weekend. Find your place. Explore Atlanta and North Georgia one local find at a time." />
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/d/dc/Atlanta_Skyline_-_Piedmont_Park.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>Atlanta Local by Logan | Atlanta &amp; North Georgia</title>
   <link rel="manifest" href="/site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260912-brand2" />
-  <link rel="stylesheet" href="/brand.css?v=20260912-brand2" />
+  <link rel="stylesheet" href="/styles.css?v=20260912-brand5" />
+  <link rel="stylesheet" href="/brand.css?v=20260912-brand5" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Atlanta Local by Logan","url":"/","description":"A local guide to Atlanta and North Georgia with places to explore, moving resources and personal recommendations."},{"@type":"Person","name":"Logan Griffiths","url":"/about"}]}</script>
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -30,10 +32,10 @@
       </a>
       <nav class="desktop-nav" aria-label="Primary navigation">
         <a href="#explore">Explore</a>
-        <a href="/moving.html">Moving here</a>
-        <a href="/picks.html">Logan’s picks</a>
-        <a href="/about.html">About Logan</a>
-        <a class="header-cta" href="/moving.html">Start here <span>↗</span></a>
+        <a href="/moving">Moving here</a>
+        <a href="/picks">Logan’s picks</a>
+        <a href="/about">About Logan</a>
+        <a class="header-cta" href="/moving">Start here <span>↗</span></a>
       </nav>
     </div>
   </header>
@@ -47,7 +49,7 @@
           <p class="hero-lede">The dinner spot. The Saturday adventure. The city you’re thinking about moving to. Get to know life around Atlanta and North Georgia one local find at a time.</p>
           <div class="hero-actions">
             <a class="button primary" href="#explore">Explore the guide <span>→</span></a>
-            <a class="button text-button-link" href="/moving.html">Thinking about moving here? <span>↗</span></a>
+            <a class="button text-button-link" href="/moving">Thinking about moving here? <span>↗</span></a>
           </div>
           <div class="hero-stats" aria-label="Guide statistics">
             <div><strong id="placeCount">—</strong><span>local places</span></div>
@@ -66,11 +68,11 @@
 
     <section class="category-strip" aria-label="Browse by category">
       <div class="shell category-links">
-        <a href="/search.html?category=Restaurants"><span class="category-icon">♜</span><span>Restaurants</span><b>↗</b></a>
-        <a href="/search.html?category=Outdoors%20%26%20Parks"><span class="category-icon">♧</span><span>Outdoors &amp; Parks</span><b>↗</b></a>
-        <a href="/search.html?category=Things%20to%20Do"><span class="category-icon">◎</span><span>Things to Do</span><b>↗</b></a>
-        <a href="/search.html?category=Coffee%20%26%20Dessert"><span class="category-icon">☕</span><span>Coffee &amp; Dessert</span><b>↗</b></a>
-        <a href="/search.html?category=Shopping"><span class="category-icon">▢</span><span>Shopping</span><b>↗</b></a>
+        <a href="/search?category=Restaurants"><span class="category-icon">♜</span><span>Restaurants</span><b>↗</b></a>
+        <a href="/search?category=Outdoors%20%26%20Parks"><span class="category-icon">♧</span><span>Outdoors &amp; Parks</span><b>↗</b></a>
+        <a href="/search?category=Things%20to%20Do"><span class="category-icon">◎</span><span>Things to Do</span><b>↗</b></a>
+        <a href="/search?category=Coffee%20%26%20Dessert"><span class="category-icon">☕</span><span>Coffee &amp; Dessert</span><b>↗</b></a>
+        <a href="/search?category=Shopping"><span class="category-icon">▢</span><span>Shopping</span><b>↗</b></a>
       </div>
     </section>
 
@@ -78,7 +80,7 @@
       <div class="shell">
         <div class="section-heading-row">
           <div><p class="section-kicker">YOUR NEXT LOCAL FIND</p><h2>Good places. Great possibilities.</h2></div>
-          <a class="plain-link" href="/search.html">Browse all places <span>→</span></a>
+          <a class="plain-link" href="/search">Browse all places <span>→</span></a>
         </div>
         <div class="filter-panel brand-filter-panel">
           <label class="filter-search"><span class="sr-only">Search places</span><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="A place, a city, something to do..." autocomplete="off" /></label>
@@ -87,7 +89,7 @@
         </div>
         <div class="results-line"><strong id="resultCount">Loading places…</strong><span id="dataStatus" class="sr-only">Connecting to guide…</span></div>
         <div id="placesGrid" class="place-grid" aria-live="polite"></div>
-        <div class="more-wrap"><a id="viewAllResults" class="button outline" href="/search.html">View more places <span>→</span></a><small id="showingCount">Showing 10</small></div>
+        <div class="more-wrap"><a id="viewAllResults" class="button outline" href="/search">View more places <span>→</span></a><small id="showingCount">Showing 10</small></div>
       </div>
     </section>
 
@@ -100,22 +102,22 @@
 
     <section class="brand-section" id="moving">
       <div class="shell">
-        <div class="section-heading-row"><div><p class="section-kicker">NEW TO THE AREA?</p><h2>Get oriented before you get settled.</h2></div><a class="plain-link" href="/moving.html">Moving &amp; relocation guide <span>→</span></a></div>
+        <div class="section-heading-row"><div><p class="section-kicker">NEW TO THE AREA?</p><h2>Get oriented before you get settled.</h2></div><a class="plain-link" href="/moving">Moving &amp; relocation guide <span>→</span></a></div>
         <div class="brand-card-grid">
-          <a class="brand-feature-card" href="/moving.html"><span class="brand-feature-icon">⌖</span><strong>Moving to Atlanta &amp; North Georgia</strong><p>Start with cities, everyday destinations and the practical details worth checking before a move.</p><span class="brand-feature-link">Start the guide →</span></a>
-          <a class="brand-feature-card" href="/search.html"><span class="brand-feature-icon">◎</span><strong>Explore before you decide</strong><p>Compare restaurants, parks, shopping and things to do across the area.</p><span class="brand-feature-link">Explore places →</span></a>
-          <a class="brand-feature-card" href="/about.html"><span class="brand-feature-icon">↗</span><strong>Meet Logan</strong><p>Learn how the guide is built, what gets included and how recommendations are handled.</p><span class="brand-feature-link">About Logan →</span></a>
+          <a class="brand-feature-card" href="/moving"><span class="brand-feature-icon">⌖</span><strong>Moving to Atlanta &amp; North Georgia</strong><p>Start with cities, everyday destinations and the practical details worth checking before a move.</p><span class="brand-feature-link">Start the guide →</span></a>
+          <a class="brand-feature-card" href="/search"><span class="brand-feature-icon">◎</span><strong>Explore before you decide</strong><p>Compare restaurants, parks, shopping and things to do across the area.</p><span class="brand-feature-link">Explore places →</span></a>
+          <a class="brand-feature-card" href="/about"><span class="brand-feature-icon">↗</span><strong>Meet Logan</strong><p>Learn how the guide is built, what gets included and how recommendations are handled.</p><span class="brand-feature-link">About Logan →</span></a>
         </div>
       </div>
     </section>
 
     <section class="brand-section picks-preview" id="picks">
       <div class="shell">
-        <div class="section-heading-row"><div><p class="section-kicker">LOGAN’S PICKS</p><h2>Things I use, like and actually recommend.</h2></div><a class="plain-link" href="/picks.html">See all picks <span>→</span></a></div>
+        <div class="section-heading-row"><div><p class="section-kicker">LOGAN’S PICKS</p><h2>Things I use, like and actually recommend.</h2></div><a class="plain-link" href="/picks">See all picks <span>→</span></a></div>
         <div class="brand-card-grid">
-          <a class="brand-feature-card" href="/picks.html#tesla"><span class="brand-feature-icon">⚡</span><strong>Tesla &amp; EV</strong><p>Ownership notes, charging, road-trip ideas, accessories and useful gear.</p><span class="brand-feature-link">Tesla &amp; EV →</span></a>
-          <a class="brand-feature-card" href="/picks.html#tech"><span class="brand-feature-icon">⌘</span><strong>Tech &amp; everyday gear</strong><p>Devices, tools and products that have earned a place in my routine.</p><span class="brand-feature-link">Tech &amp; gear →</span></a>
-          <a class="brand-feature-card" href="/picks.html#local"><span class="brand-feature-icon">★</span><strong>Local favorites</strong><p>Atlanta and North Georgia places that stand out and are worth knowing about.</p><span class="brand-feature-link">Local favorites →</span></a>
+          <a class="brand-feature-card" href="/picks#tesla"><span class="brand-feature-icon">⚡</span><strong>Tesla &amp; EV</strong><p>Ownership notes, charging, road-trip ideas, accessories and useful gear.</p><span class="brand-feature-link">Tesla &amp; EV →</span></a>
+          <a class="brand-feature-card" href="/picks#tech"><span class="brand-feature-icon">⌘</span><strong>Tech &amp; everyday gear</strong><p>Devices, tools and products that have earned a place in my routine.</p><span class="brand-feature-link">Tech &amp; gear →</span></a>
+          <a class="brand-feature-card" href="/picks#local"><span class="brand-feature-icon">★</span><strong>Local favorites</strong><p>Atlanta and North Georgia places that stand out and are worth knowing about.</p><span class="brand-feature-link">Local favorites →</span></a>
         </div>
       </div>
     </section>
@@ -123,14 +125,14 @@
     <section class="about-preview">
       <div class="shell about-preview-card">
         <div><p class="section-kicker">BEHIND THE GUIDE</p><h2>Atlanta Local is built by Logan.</h2><p>I’m constantly exploring the area, researching local places, testing products and organizing what I find into something useful.</p></div>
-        <a class="button outline" href="/about.html">About Logan <span>→</span></a>
+        <a class="button outline" href="/about">About Logan <span>→</span></a>
       </div>
     </section>
 
     <section id="connect" class="connect-section">
       <div class="shell connect-card">
         <div><p class="section-kicker light">START HERE</p><h2>Thinking about moving here?</h2><p>Use the relocation guide to get oriented, compare cities and start figuring out which parts of Atlanta and North Georgia you want to explore.</p></div>
-        <a class="button light" href="/moving.html">Explore the moving guide <span>↗</span></a>
+        <a class="button light" href="/moving">Explore the moving guide <span>↗</span></a>
       </div>
     </section>
   </main>
@@ -138,11 +140,11 @@
   <footer class="site-footer">
     <div class="shell footer-main">
       <div><h2>Atlanta Local</h2><p>Local life, useful finds and honest recommendations.<br>Built by Logan.</p></div>
-      <div class="footer-links"><a href="#explore">Explore the guide</a><a href="/moving.html">Moving here</a><a href="/picks.html">Logan’s picks</a><a href="/about.html">About Logan</a></div>
+      <div class="footer-links"><a href="#explore">Explore the guide</a><a href="/moving">Moving here</a><a href="/picks">Logan’s picks</a><a href="/about">About Logan</a></div>
       <div class="footer-meta"><strong>Atlanta &amp; North Georgia</strong><span>Local guide &amp; recommendations</span><span>Created by Logan Griffiths</span></div>
     </div>
-    <div class="shell footer-bottom"><p>Verify hours, pricing, routes and other changing details with official sources. Referral or affiliate relationships, when used, will be disclosed where they appear.</p><a href="/disclaimer.html">Privacy &amp; disclosures</a><p class="credit">Skyline photo: <a href="https://commons.wikimedia.org/wiki/File:Atlanta_Skyline_-_Piedmont_Park.png" target="_blank" rel="noopener noreferrer">seanpinto / Wikimedia Commons</a> · CC BY 2.0 · Cropped.</p></div>
+    <div class="shell footer-bottom"><p>Verify hours, pricing, routes and other changing details with official sources. Referral or affiliate relationships, when used, will be disclosed where they appear.</p><a href="/disclaimer">Privacy &amp; disclosures</a><p class="credit">Skyline photo: <a href="https://commons.wikimedia.org/wiki/File:Atlanta_Skyline_-_Piedmont_Park.png" target="_blank" rel="noopener noreferrer">seanpinto / Wikimedia Commons</a> · CC BY 2.0 · Cropped.</p></div>
   </footer>
-  <script src="/app.js?v=20260912-brand2" defer></script>
+  <script src="/app.js?v=20260912-brand5" defer></script>
 </body>
 </html>
