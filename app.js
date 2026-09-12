@@ -4,7 +4,7 @@ const $=id=>document.getElementById(id);
 const text=(v,f="")=>String(v??f).trim();
 const norm=v=>text(v).normalize("NFKC").replace(/\s+/g," ").toLowerCase();
 function slugify(v){return text(v).toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/&/g," and ").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
-function placeSlug(p){return `${slugify(p.Place)}-${slugify(p.City)}`}
+function placeSlug(p){return slugify(text(p["URL Slug"])||`${text(p.Place)}-${text(p.City)}`)}
 function placeCategory(p){return text(p["Public Category (Auto)"],text(p.Category,"Other"))}
 function placeNotes(p){return text(p["Client Notes"],text(p["Vibe / Good For"]))}
 function uniqSorted(v){return [...new Set(v.filter(Boolean))].sort((a,b)=>a.localeCompare(b))}
