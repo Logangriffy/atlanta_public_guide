@@ -4,7 +4,7 @@ const $ = (id) => document.getElementById(id);
 const text = (value, fallback = "") => String(value ?? fallback).trim();
 const norm = (value) => text(value).normalize("NFKC").replace(/\s+/g, " ").toLowerCase();
 function slugify(value){return text(value).toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"").replace(/&/g," and ").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
-function placeSlug(place){return `${slugify(place.Place)}-${slugify(place.City)}`;}
+function placeSlug(place){return slugify(text(place["URL Slug"])||`${text(place.Place)}-${text(place.City)}`);}
 function category(place){return text(place["Public Category (Auto)"],text(place.Category,"Other"));}
 function notes(place){return text(place["Client Notes"],text(place["Vibe / Good For"]));}
 function mapLink(address){return address?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`:"";}
