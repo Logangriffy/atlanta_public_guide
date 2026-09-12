@@ -1,0 +1,47 @@
+name: Update sitemap
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - sitemap.xml
+      - slug-registry.json
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    env:
+      BASE_URL: https://atlanta-public-guide.atlanta-guide.workers.dev
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate sitemap and stable slug registry
+        run: python scripts/generate_sitemap.py
+
+      - name: Commit generated files if changed
+        run: |
+          git config user.name "atlanta-local-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add sitemap.xml slug-registry.json
+          if git diff --cached --quiet; then
+            echo "No sitemap changes."
+            exit 0
+          fi
+          git commit -m "Update generated sitemap"
+          git pull --rebase origin main
+          git push origin HEAD:main
