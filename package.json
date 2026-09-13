@@ -1,0 +1,16 @@
+{
+  "name": "atlanta-public-guide",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-static.mjs",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "d1:schema:local": "wrangler d1 execute atlanta-local-guide --local --file=./database/schema.sql",
+    "d1:schema:remote": "wrangler d1 execute atlanta-local-guide --remote --file=./database/schema.sql",
+    "d1:seed:remote": "wrangler d1 execute atlanta-local-guide --remote --file=./database/seed.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.34.0"
+  }
+}
