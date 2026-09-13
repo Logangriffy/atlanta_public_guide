@@ -1,4 +1,4 @@
-const CONFIG = { sheet: "Places", pageSize: 30 };
+import('/site.js?v=20260913-nav3').catch(()=>{});const CONFIG = { sheet: "Places", pageSize: 30 };
 const state = { places: [], visible: CONFIG.pageSize };
 const $ = (id) => document.getElementById(id);
 const text = (value, fallback = "") => String(value ?? fallback).trim();
