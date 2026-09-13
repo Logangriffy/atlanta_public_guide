@@ -21,7 +21,7 @@ Do not change the D1 binding variable from `DB` unless `worker.js` is changed to
 
 ## Cloudflare dashboard setup
 
-### 1. Create D1
+### 1. Create D1 manually
 
 Cloudflare Dashboard → D1 SQL Database → Create Database
 
@@ -29,37 +29,11 @@ Use:
 - Database name: `atlanta-local-guide`
 - Location hint: Eastern North America (`enam`) if the dashboard offers a location hint
 
-Create the database.
+Create the database, then copy its Database ID / UUID.
 
-### 2. Bind D1 to the existing Worker
+IMPORTANT: because this repository already contains a draft D1 binding, put the real database UUID into `wrangler.jsonc` before the first new Git deployment. Otherwise Wrangler's automatic provisioning can create a separate D1 resource.
 
-Cloudflare Dashboard → Workers & Pages → `atlanta-public-guide` → Bindings → Add binding → D1 database → Add binding
-
-Use:
-- Variable name: `DB`
-- D1 database: `atlanta-local-guide`
-
-Add the binding.
-
-### 3. Git/Build settings
-
-Cloudflare Dashboard → Workers & Pages → `atlanta-public-guide` → Settings → Builds
-
-The Git repository should be:
-- `Logangriffy/atlanta_public_guide`
-- Production branch: `main`
-
-Use the repository root as the root directory.
-
-Recommended commands:
-- Build command: `npm run build`
-- Deploy command: `npx wrangler deploy`
-
-The Worker name in Cloudflare must remain `atlanta-public-guide`, matching `wrangler.jsonc`.
-
-### 4. Put the database ID into wrangler.jsonc if Cloudflare does not auto-provision/update it
-
-Cloudflare can auto-provision draft bindings on deployment, but when the database is created manually the safest final configuration is to add its UUID to `wrangler.jsonc`:
+Final binding block:
 
 ```jsonc
 "d1_databases": [
@@ -71,7 +45,45 @@ Cloudflare can auto-provision draft bindings on deployment, but when the databas
 ]
 ```
 
-The database UUID is available from the D1 database details page or through `npx wrangler d1 info atlanta-local-guide`.
+The database UUID is available on the D1 database details page. You can also retrieve it with:
+
+```bash
+npx wrangler d1 info atlanta-local-guide
+```
+
+### 2. Deploy/bind the existing Worker
+
+Once `wrangler.jsonc` contains the real Database ID, deploying the repository will create the Worker binding from configuration.
+
+After deployment, verify it in:
+
+Cloudflare Dashboard → Workers & Pages → `atlanta-public-guide` → Bindings
+
+You should see:
+- Binding type: D1 database
+- Variable name: `DB`
+- Database: `atlanta-local-guide`
+
+If it is missing, use:
+
+Bindings → Add binding → D1 database → Add binding
+
+and choose:
+- Variable name: `DB`
+- D1 database: `atlanta-local-guide`
+
+### 3. Git/Build settings
+
+Cloudflare Dashboard → Workers & Pages → `atlanta-public-guide` → Settings → Builds
+
+Use:
+- Git repository: `Logangriffy/atlanta_public_guide`
+- Production branch: `main`
+- Root directory: repository root
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+
+The Worker name in Cloudflare must remain `atlanta-public-guide`, matching `wrangler.jsonc`.
 
 ## Import the schema and current website data
 
@@ -85,7 +97,9 @@ npx wrangler d1 execute atlanta-local-guide --remote --file=./database/schema.sq
 npx wrangler d1 execute atlanta-local-guide --remote --file=./database/seed.sql
 ```
 
-The seed generator intentionally imports only website-safe fields. It does not migrate private notes, client notes, community mapping, Pulte proximity fields, or other internal/admin-only columns.
+Cloudflare's D1 importer accepts SQL files through `wrangler d1 execute --remote --file`. The generated seed uses individual SQLite-compatible statements and intentionally does not include explicit `BEGIN TRANSACTION` / `COMMIT` wrappers.
+
+The seed generator imports only website-safe fields. It does not migrate private notes, client notes, community mapping, Pulte proximity fields, or other internal/admin-only columns.
 
 ## Verify before relying on D1
 
