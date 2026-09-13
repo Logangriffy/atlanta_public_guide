@@ -86,8 +86,6 @@ def main() -> None:
     city_id = {name: i + 1 for i, name in enumerate(cities)}
 
     statements = [
-        "PRAGMA foreign_keys = OFF;",
-        "BEGIN TRANSACTION;",
         "DELETE FROM place_images;",
         "DELETE FROM places;",
         "DELETE FROM cities;",
@@ -132,7 +130,6 @@ def main() -> None:
                 f"({sql(pid)},{sql(url)},{sql(alt)},{sql(credit)},{position});"
             )
 
-    statements.extend(["COMMIT;", "PRAGMA foreign_keys = ON;"])
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("\n".join(statements) + "\n", encoding="utf-8")
     print(f"Generated {OUT} with {len(active)} active places across {len(cities)} cities.")
