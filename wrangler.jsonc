@@ -14,7 +14,8 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "atlanta-local-guide"
+      "database_name": "atlanta-local-guide",
+      "database_id": "6f2263f1-8306-40fe-9609-d49ba68a9445"
     }
   ],
   "observability": {
