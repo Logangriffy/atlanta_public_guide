@@ -48,6 +48,20 @@
     "source": "https://commons.wikimedia.org/wiki/File:Downtown_Gainesville,_GA_Oct_2017_2.jpg",
     "label": "Downtown Gainesville"
   },
+  "Hoschton": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Hoschton%20City%20Hall%20Oct%202012.jpg",
+    "credit": "Chris Pruitt / Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Hoschton_City_Hall_Oct_2012.jpg",
+    "label": "Hoschton City Hall"
+  },
+  "Jefferson": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/JeffersonGeorgiaTownSquare01.jpg",
+    "credit": "Richard Chambers / Wikimedia Commons",
+    "license": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:JeffersonGeorgiaTownSquare01.jpg",
+    "label": "Downtown Jefferson town square"
+  },
   "Roswell": {
     "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Downtown%20Roswell%20GA%2C%20Dec%202016%202.jpg",
     "credit": "Thomson200 / Wikimedia Commons",
