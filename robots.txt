@@ -1,4 +1,2 @@
 User-agent: *
-Allow: /
-
-Sitemap: https://atlanta-public-guide.atlanta-guide.workers.dev/sitemap.xml
+Disallow: /
