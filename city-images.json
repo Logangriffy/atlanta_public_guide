@@ -1,0 +1,65 @@
+{
+  "Atlanta": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Atlanta_Skyline_-_Piedmont_Park.png",
+    "credit": "seanpinto / Wikimedia Commons",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Atlanta_Skyline_-_Piedmont_Park.png",
+    "label": "Atlanta skyline from Piedmont Park"
+  },
+  "Alpharetta": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Alpharetta%2C%20Georgia%20City%20Hall.jpg",
+    "credit": "Thomson200 / Wikimedia Commons",
+    "license": "CC0 1.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Alpharetta,_Georgia_City_Hall.jpg",
+    "label": "Alpharetta City Hall"
+  },
+  "Braselton": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/American%20winery%20Chateau%20Elan.jpg",
+    "credit": "Bruce Tuten / Wikimedia Commons",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:American_winery_Chateau_Elan.jpg",
+    "label": "Chateau Elan in Braselton"
+  },
+  "Buford": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Buford%20Georgia%20Main%20Street.jpg",
+    "credit": "SudoGhost / Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Buford_Georgia_Main_Street.jpg",
+    "label": "Historic Main Street in Buford"
+  },
+  "Cumming": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Cumming%20City%20Hall%20-%20panoramio.jpg",
+    "credit": "Wikimedia Commons contributor",
+    "license": "See source page",
+    "source": "https://commons.wikimedia.org/wiki/File:Cumming_City_Hall_-_panoramio.jpg",
+    "label": "Cumming City Hall"
+  },
+  "Duluth": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/ECD%20Duluth%20GA.jpg",
+    "credit": "Southernkeith / Wikimedia Commons",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:ECD_Duluth_GA.jpg",
+    "label": "Duluth Town Green"
+  },
+  "Flowery Branch": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Main%20Street%2C%20Flowery%20Branch%20GA.jpg",
+    "credit": "John Phelan / Wikimedia Commons",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Main_Street,_Flowery_Branch_GA.jpg",
+    "label": "Main Street in Flowery Branch"
+  },
+  "Gainesville": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Downtown%20Gainesville%2C%20GA%20Oct%202017%202.jpg",
+    "credit": "Thomson200 / Wikimedia Commons",
+    "license": "CC0 1.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Downtown_Gainesville,_GA_Oct_2017_2.jpg",
+    "label": "Downtown Gainesville"
+  },
+  "Roswell": {
+    "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Downtown%20Roswell%20GA%2C%20Dec%202016%202.jpg",
+    "credit": "Thomson200 / Wikimedia Commons",
+    "license": "CC0 1.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Downtown_Roswell_GA,_Dec_2016_2.jpg",
+    "label": "Downtown Roswell"
+  }
+}
